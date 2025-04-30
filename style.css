@@ -1,0 +1,29 @@
+/* style.css */
+/* You can add custom CSS here if Tailwind utilities aren't enough */
+
+body {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  }
+  
+  /* Add a subtle pulse to the accent color text in the hero */
+  #hero .text-accent {
+    animation: pulse-accent 2s infinite;
+  }
+  
+  @keyframes pulse-accent {
+    0%, 100% {
+      text-shadow: 0 0 5px theme('colors.accent');
+    }
+    50% {
+      text-shadow: 0 0 15px theme('colors.accent');
+    }
+  }
+  
+  /* Example: Styling for the form status message */
+  #form-status.success {
+      color: theme('colors.green.400');
+  }
+  
+  #form-status.error {
+      color: theme('colors.red.400');
+  }

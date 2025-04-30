@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetHelp - Tailored IT Support & Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Optional: Tailwind configuration
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'primary': '#0D6EFD',
+                'secondary': '#6C757D',
+                'dark-bg': '#1a202c',
+                'light-text': '#edf2f7',
+                'accent': '#38bdf8',
+              },
+              animation: {
+                'gradient-bg': 'gradient-bg 15s ease infinite',
+                'fade-in': 'fade-in 1s ease-out forwards',
+                'slide-in-up': 'slide-in-up 0.8s ease-out forwards',
+              },
+              keyframes: {
+                'gradient-bg': {
+                  '0%, 100%': { backgroundPosition: '0% 50%' },
+                  '50%': { backgroundPosition: '100% 50%' },
+                },
+                'fade-in': {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                 'slide-in-up': {
+                  '0%': { transform: 'translateY(30px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                }
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-dark-bg text-light-text font-sans leading-normal tracking-normal">
+
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-r from-gray-900 via-slate-800 to-gray-900 animate-gradient-bg"></div>
+
+    <header class="sticky top-0 z-50 bg-dark-bg/80 backdrop-blur-md shadow-md animate-fade-in">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent hover:text-white transition duration-300">
+                NetHelp </a>
+            <div>
+                <a href="#services" class="text-light-text hover:text-accent px-3 py-2 rounded transition duration-300">Services</a>
+                <a href="#fix-method" class="text-light-text hover:text-accent px-3 py-2 rounded transition duration-300">Our Method</a>
+                <a href="#contact" class="bg-accent hover:bg-sky-500 text-white font-bold px-4 py-2 rounded-full transition duration-300 ml-4">Contact Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero" class="container mx-auto px-6 py-24 text-center animate-slide-in-up">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+            Tech That Works <span class="text-accent">Exclusively For You</span>.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Stop wrestling with generic IT solutions. NetHelp delivers custom IT support, Excel wizardry, and powerful automation tailored precisely to your small business, startup, or personal needs.
+        </p>
+        <a href="#contact" class="bg-accent hover:bg-sky-500 text-white font-bold px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105">
+            Get Your Custom Solution
+        </a>
+    </section>
+
+    <section id="fix-method" class="py-20 bg-gray-800/50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-2 text-accent">Your Proprietary System: The FIX Method</h2>
+            <p class="text-gray-300 mb-12 max-w-2xl mx-auto">We believe tech should be easy, not a barrier. Our unique FIX method ensures solutions that fit perfectly.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
+                    <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-crosshairs"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Focus</h3>
+                    <p class="text-gray-400">We start by understanding your exact problem and goals. We listen carefully to your needs.</p>
+                </div>
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
+                     <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-cogs"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Implement</h3>
+                    <p class="text-gray-400">We design and install a simple, tailored solution – whether it's robust IT support, a custom workflow, or an automated tool.</p>
+                </div>
+                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
+                     <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Xcel</h3>
+                    <p class="text-gray-400">We support you as you use the system, ensuring it works flawlessly and scales with your needs. We don't just build; we partner.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-12 text-accent">What We Do</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
+                    <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-headset"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Dependable IT Support</h3>
+                    <p class="text-gray-300">Solving everyday IT problems that should be simple but often aren't. We fix issues you don't have time for, ensuring your tech runs smoothly and reliably, saving you time and stress.</p>
+                </div>
+                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
+                     <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-file-excel"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Custom Excel Solutions</h3>
+                    <p class="text-gray-300">Unlock the true power of your data. We build tailored spreadsheets, dashboards, and reporting tools in Excel that streamline your processes and provide clear insights.</p>
+                </div>
+                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
+                     <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-robot"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Workflow Automation</h3>
+                    <p class="text-gray-300">Eliminate repetitive tasks. We design and implement custom automation tools and workflows that save you hours, reduce errors, and free you up to focus on what matters most.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <section id="why-us" class="py-20 bg-gray-800/50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-12 text-accent">Why Partner with NetHelp?</h2>
+             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-left">
+                 <div class="flex items-start space-x-4">
+                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-users"></i></div>
+                     <div>
+                         <h4 class="font-semibold text-lg mb-1">Client-Focused Approach</h4>
+                         <p class="text-gray-300">We treat every customer like they matter—whether you're a solo entrepreneur or a growing business. We listen first.</p>
+                     </div>
+                 </div>
+                  <div class="flex items-start space-x-4">
+                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-puzzle-piece"></i></div>
+                     <div>
+                         <h4 class="font-semibold text-lg mb-1">Truly Custom Solutions</h4>
+                         <p class="text-gray-300">Our solutions are built *for you*. So tailored, they fit your needs perfectly, providing a unique competitive edge.</p>
+                     </div>
+                 </div>
+                 <div class="flex items-start space-x-4">
+                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-handshake-angle"></i></div>
+                     <div>
+                         <h4 class="font-semibold text-lg mb-1">Reliable & Fair</h4>
+                         <p class="text-gray-300">We believe tech should be easy. We provide dependable support, don't overcharge, and won't make you wait.</p>
+                     </div>
+                 </div>
+                  <div class="flex items-start space-x-4">
+                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-brain"></i></div>
+                     <div>
+                         <h4 class="font-semibold text-lg mb-1">Problem Solvers</h4>
+                         <p class="text-gray-300">We love solving problems and helping others succeed by making technology work seamlessly for them.</p>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-10 text-accent">Let's Build Your Solution</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800/60 p-8 rounded-lg shadow-xl">
+                <p class="text-center text-gray-300 mb-6">Fill out the form below, and we'll get back to you to discuss how NetHelp can focus on your needs, implement the right solution, and help you excel.</p>
+
+                <form id="contact-form">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium text-light-text">Your Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="name" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-light-text">Your Email <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="you@company.com" required>
+                        </div>
+                    </div>
+                     <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-light-text">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="(123) 456-7890">
+                        </div>
+                        <div>
+                            <label for="company" class="block mb-2 text-sm font-medium text-light-text">Company Name (Optional)</label>
+                            <input type="text" id="company" name="company" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="Your Business Inc.">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="service" class="block mb-2 text-sm font-medium text-light-text">Service Interest <span class="text-red-500">*</span></label>
+                        <select id="service" name="service_interest" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="IT Support">IT Support</option>
+                            <option value="Custom Excel">Custom Excel Solution</option>
+                            <option value="Automation Tools">Automation Tools</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block mb-2 text-sm font-medium text-light-text">Your Message <span class="text-red-500">*</span></label>
+                        <textarea id="message" name="message" rows="4" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="Tell us about your project or problem..." required></textarea>
+                    </div>
+
+                    <button type="submit" name="submit" class="w-full bg-accent hover:bg-sky-500 text-white font-bold py-3 px-5 rounded-lg transition duration-300 text-lg transform hover:scale-105">
+                        Send Message
+                    </button>
+                    <p id="form-status" class="mt-4 text-center text-sm"></p>
+                     <p class="text-xs text-center text-gray-400 mt-4">
+                       <i class="fa-solid fa-check mr-1"></i> Form submissions handled via Google Apps Script.
+                    </p>
+                </form>
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 mt-10">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500 text-sm">
+            &copy; <span id="current-year"></span> NetHelp. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
