@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetHelp - Tailored IT Support & Automation</title>
+    <title>NetHelp - Automation Power-Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
-        // Optional: Tailwind configuration
         tailwind.config = {
           theme: {
             extend: {
               colors: {
-                'primary': '#0D6EFD',
-                'secondary': '#6C757D',
-                'dark-bg': '#1a202c',
-                'light-text': '#edf2f7',
-                'accent': '#38bdf8',
+                'nh-dark': '#2c3e50',
+                'nh-darker': '#233140',
+                'nh-light': '#ecf0f1',
+                'nh-accent': '#f39c12',
+                'nh-accent-hover': '#e67e22',
+                'glass-bg': 'rgba(44, 62, 80, 0.6)',
+                'glass-border': 'rgba(243, 156, 18, 0.3)',
+              },
+              fontFamily: {
+                sans: ['Roboto', 'sans-serif'],
               },
               animation: {
                 'gradient-bg': 'gradient-bg 15s ease infinite',
-                'fade-in': 'fade-in 1s ease-out forwards',
-                'slide-in-up': 'slide-in-up 0.8s ease-out forwards',
+                'subtle-float': 'subtle-float 3s ease-in-out infinite alternate',
+                'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+                'slide-in-left': 'slide-in-left 0.7s ease-out forwards',
               },
               keyframes: {
                 'gradient-bg': {
                   '0%, 100%': { backgroundPosition: '0% 50%' },
                   '50%': { backgroundPosition: '100% 50%' },
                 },
-                'fade-in': {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
+                'subtle-float': {
+                    '0%': { transform: 'translateY(0px)' },
+                    '100%': { transform: 'translateY(-10px)' },
                 },
-                 'slide-in-up': {
-                  '0%': { transform: 'translateY(30px)', opacity: '0' },
-                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                'fade-in-up': {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                'slide-in-left': {
+                    '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                    '100%': { opacity: '1', transform: 'translateX(0)' },
                 }
               }
             }
@@ -43,174 +53,262 @@
         }
       </script>
 </head>
-<body class="bg-dark-bg text-light-text font-sans leading-normal tracking-normal">
+<body class="bg-nh-darker text-nh-light font-sans leading-normal tracking-normal">
 
-    <div class="fixed inset-0 z-[-1] bg-gradient-to-r from-gray-900 via-slate-800 to-gray-900 animate-gradient-bg"></div>
+    <div class="fixed inset-0 z-[-1] overflow-hidden">
+        <div class="animated-lines"></div>
+    </div>
 
-    <header class="sticky top-0 z-50 bg-dark-bg/80 backdrop-blur-md shadow-md animate-fade-in">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-accent hover:text-white transition duration-300">
-                NetHelp </a>
-            <div>
-                <a href="#services" class="text-light-text hover:text-accent px-3 py-2 rounded transition duration-300">Services</a>
-                <a href="#fix-method" class="text-light-text hover:text-accent px-3 py-2 rounded transition duration-300">Our Method</a>
-                <a href="#contact" class="bg-accent hover:bg-sky-500 text-white font-bold px-4 py-2 rounded-full transition duration-300 ml-4">Contact Us</a>
+    <header id="header" class="sticky top-0 z-50 bg-nh-dark/90 backdrop-blur-md shadow-lg transition-all duration-300">
+        <nav class="container mx-auto px-4 md:px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-3">
+                    <img src="images/logo.jpeg" alt="NetHelp Logo" class="h-16 md:h-20 animated-logo">
+                    <span class="text-xl md:text-2xl font-bold text-nh-light hover:text-nh-accent transition duration-300">NetHelp</span>
+                </a>
+
+                <button id="menu-button" class="md:hidden text-nh-light hover:text-nh-accent focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+
+                <div id="nav-links-desktop" class="hidden md:flex space-x-5 items-center nav-indicator-container">
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#process" class="nav-link">Our Process</a>
+                    <a href="#why-us" class="nav-link">Why NetHelp?</a>
+                    <a href="#contact" class="ml-6 bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-5 py-2.5 rounded-full transition duration-300 transform hover:scale-105 text-sm">
+                        Get Power-Up
+                    </a>
+                </div>
             </div>
         </nav>
+        <div id="nav-links-mobile" class="mobile-drawer fixed top-0 right-0 h-full w-3/4 max-w-sm bg-nh-dark shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden p-6">
+            <div class="flex justify-between items-center mb-8">
+                <img src="images/logo.jpeg" alt="NetHelp Logo" class="h-14">
+                <button id="close-menu-button" class="text-nh-light hover:text-nh-accent text-2xl">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <a href="#services" class="mobile-nav-link">Automation Services</a>
+            <a href="#process" class="mobile-nav-link">Our Process</a>
+            <a href="#why-us" class="mobile-nav-link">Why NetHelp?</a>
+            <a href="#contact" class="mt-6 block text-center bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-6 py-3 rounded-full transition duration-300 w-full">
+                Get Power-Up
+            </a>
+        </div>
     </header>
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
 
-    <section id="hero" class="container mx-auto px-6 py-24 text-center animate-slide-in-up">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-            Tech That Works <span class="text-accent">Exclusively For You</span>.
+    <section id="hero" class="relative container mx-auto px-4 md:px-6 py-20 md:py-32 text-center overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-center items-center">
+        <div class="absolute inset-0 z-[-1] hero-bg-pattern opacity-10"></div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in-up hero-headline">
+            <span class="wavychar">E</span><span class="wavychar">v</span><span class="wavychar">e</span><span class="wavychar">r</span><span class="wavychar">y</span> <span class="wavychar">C</span><span class="wavychar">h</span><span class="wavychar">a</span><span class="wavychar">l</span><span class="wavychar">l</span><span class="wavychar">e</span><span class="wavychar">n</span><span class="wavychar">g</span><span class="wavychar">e</span> <span class="wavychar">I</span><span class="wavychar">s</span> <span class="wavychar">a</span> <span class="wavychar">B</span><span class="wavychar">o</span><span class="wavychar">s</span><span class="wavychar">s</span> <span class="wavychar">F</span><span class="wavychar">i</span><span class="wavychar">g</span><span class="wavychar">h</span><span class="wavychar">t</span><span class="text-nh-accent">.</span><br class="hidden md:block">
+            <span class="block mt-2 md:mt-4 text-3xl sm:text-4xl md:text-5xl">
+                <span class="wavychar">W</span><span class="wavychar">e</span><span class="wavychar">’</span><span class="wavychar">r</span><span class="wavychar">e</span> <span class="wavychar">Y</span><span class="wavychar">o</span><span class="wavychar">u</span><span class="wavychar">r</span> <span class="text-nh-accent wavychar">P</span><span class="text-nh-accent wavychar">o</span><span class="text-nh-accent wavychar">w</span><span class="text-nh-accent wavychar">e</span><span class="text-nh-accent wavychar">r</span><span class="text-nh-accent wavychar">-</span><span class="text-nh-accent wavychar">U</span><span class="text-nh-accent wavychar">p</span><span class="text-nh-accent">.</span>
+            </span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Stop wrestling with generic IT solutions. NetHelp delivers custom IT support, Excel wizardry, and powerful automation tailored precisely to your small business, startup, or personal needs.
+        <p class="text-base md:text-xl text-nh-light/80 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.3s;">
+            NetHelp delivers intelligent automation solutions that streamline your workflows, eliminate repetitive tasks, and unlock new levels of efficiency for your business.
         </p>
-        <a href="#contact" class="bg-accent hover:bg-sky-500 text-white font-bold px-8 py-3 rounded-full text-lg transition duration-300 transform hover:scale-105">
-            Get Your Custom Solution
+        <a href="#contact" class="bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-8 py-3 md:px-10 md:py-4 rounded-full text-lg md:text-xl transition duration-300 transform hover:scale-105 animate-fade-in-up custom-button-hover" style="animation-delay: 0.6s;">
+            Unlock Your Automation <i class="fa-solid fa-bolt ml-2"></i>
         </a>
     </section>
 
-    <section id="fix-method" class="py-20 bg-gray-800/50">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-2 text-accent">Your Proprietary System: The FIX Method</h2>
-            <p class="text-gray-300 mb-12 max-w-2xl mx-auto">We believe tech should be easy, not a barrier. Our unique FIX method ensures solutions that fit perfectly.</p>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
-                    <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-crosshairs"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Focus</h3>
-                    <p class="text-gray-400">We start by understanding your exact problem and goals. We listen carefully to your needs.</p>
+    <section id="services" class="py-16 md:py-24 bg-nh-darker/70">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Our Automation Services</h2>
+            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
+                We specialize in crafting bespoke automation solutions to meet your unique business challenges.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-cogs fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">Workflow Automation Design</h3>
+                    <p class="text-nh-light/70 text-sm">We analyze your existing processes and design streamlined, automated workflows that save time, reduce errors, and boost productivity from end to end.</p>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
-                     <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-cogs"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Implement</h3>
-                    <p class="text-gray-400">We design and install a simple, tailored solution – whether it's robust IT support, a custom workflow, or an automated tool.</p>
+                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-robot fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">Custom Automation Tool Development</h3>
+                    <p class="text-nh-light/70 text-sm">Need a specific tool for a unique task? We build custom scripts, bots, and small applications tailored precisely to your automation requirements.</p>
                 </div>
-                <div class="bg-dark-bg p-6 rounded-lg shadow-lg hover:shadow-accent/30 transition duration-300 transform hover:-translate-y-1">
-                     <div class="text-5xl text-accent mb-4"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Xcel</h3>
-                    <p class="text-gray-400">We support you as you use the system, ensuring it works flawlessly and scales with your needs. We don't just build; we partner.</p>
+                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-database fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">Data Entry & Processing Automation</h3>
+                    <p class="text-nh-light/70 text-sm">Automate the collection, validation, transformation, and migration of data between systems, ensuring accuracy and freeing up your team.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12 text-accent">What We Do</h2>
-            <div class="grid md:grid-cols-3 gap-8 text-left">
-                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
-                    <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-headset"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Dependable IT Support</h3>
-                    <p class="text-gray-300">Solving everyday IT problems that should be simple but often aren't. We fix issues you don't have time for, ensuring your tech runs smoothly and reliably, saving you time and stress.</p>
+                <div class="glassmorphism-card animate-fade-in-up lg:col-start-1 lg:col-end-2" style="animation-delay: 0.8s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-chart-line fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">Automated Reporting Solutions</h3>
+                    <p class="text-nh-light/70 text-sm">Get timely insights without the manual grind. We develop systems to automatically generate and distribute custom reports.</p>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
-                     <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-file-excel"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Custom Excel Solutions</h3>
-                    <p class="text-gray-300">Unlock the true power of your data. We build tailored spreadsheets, dashboards, and reporting tools in Excel that streamline your processes and provide clear insights.</p>
+                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 1s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-brain fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">AI & Machine Learning Integration</h3>
+                    <p class="text-nh-light/70 text-sm">Leverage the power of AI for smarter automation, from intelligent document processing to predictive analytics.</p>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg transition duration-300">
-                     <div class="text-3xl text-accent mb-3"><i class="fa-solid fa-robot"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Workflow Automation</h3>
-                    <p class="text-gray-300">Eliminate repetitive tasks. We design and implement custom automation tools and workflows that save you hours, reduce errors, and free you up to focus on what matters most.</p>
+                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 1.2s;">
+                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-headset fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-nh-light">Automation Consultation</h3>
+                    <p class="text-nh-light/70 text-sm">Not sure where to start? We provide expert consultation to identify the best automation opportunities within your business.</p>
                 </div>
             </div>
         </div>
     </section>
 
-     <section id="why-us" class="py-20 bg-gray-800/50">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12 text-accent">Why Partner with NetHelp?</h2>
-             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-left">
-                 <div class="flex items-start space-x-4">
-                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-users"></i></div>
-                     <div>
-                         <h4 class="font-semibold text-lg mb-1">Client-Focused Approach</h4>
-                         <p class="text-gray-300">We treat every customer like they matter—whether you're a solo entrepreneur or a growing business. We listen first.</p>
-                     </div>
-                 </div>
-                  <div class="flex items-start space-x-4">
-                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-puzzle-piece"></i></div>
-                     <div>
-                         <h4 class="font-semibold text-lg mb-1">Truly Custom Solutions</h4>
-                         <p class="text-gray-300">Our solutions are built *for you*. So tailored, they fit your needs perfectly, providing a unique competitive edge.</p>
-                     </div>
-                 </div>
-                 <div class="flex items-start space-x-4">
-                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-handshake-angle"></i></div>
-                     <div>
-                         <h4 class="font-semibold text-lg mb-1">Reliable & Fair</h4>
-                         <p class="text-gray-300">We believe tech should be easy. We provide dependable support, don't overcharge, and won't make you wait.</p>
-                     </div>
-                 </div>
-                  <div class="flex items-start space-x-4">
-                     <div class="text-2xl text-accent pt-1"><i class="fa-solid fa-brain"></i></div>
-                     <div>
-                         <h4 class="font-semibold text-lg mb-1">Problem Solvers</h4>
-                         <p class="text-gray-300">We love solving problems and helping others succeed by making technology work seamlessly for them.</p>
-                     </div>
-                 </div>
-             </div>
+    <section id="process" class="py-16 md:py-24">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Your Automation Journey</h2>
+            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
+                We follow a clear, collaborative process to power-up your business.
+            </p>
+            <div class="relative">
+                <div class="hidden md:block absolute top-5 left-1/2 w-1 bg-nh-accent/30 h-[calc(100%-2.5rem)] -translate-x-1/2"></div>
+                <div class="space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-16 md:gap-y-16">
+                    <div class="process-step animate-fade-in-up md:animate-slide-in-left">
+                        <div class="process-step-number">01</div>
+                        <div class="process-step-content">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Identify the Need</h3>
+                            <p class="text-lg font-semibold mb-2 text-nh-light">"Uncover the Challenge"</p>
+                            <p class="text-nh-light/70 text-sm">We start by thoroughly understanding your current processes, pain points, and objectives to pinpoint the most impactful automation opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block"></div>
+                    <div class="hidden md:block"></div>
+                    <div class="process-step animate-fade-in-up md:animate-slide-in-left md:text-right" style="animation-delay: 0.2s;">
+                         <div class="process-step-number md:ml-auto">02</div>
+                         <div class="process-step-content">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Craft the Solution</h3>
+                            <p class="text-lg font-semibold mb-2 text-nh-light">"Blueprint the Path"</p>
+                            <p class="text-nh-light/70 text-sm">Our experts design a tailored automation strategy and solution architecture, outlining the technology, tools, and steps for implementation.</p>
+                        </div>
+                    </div>
+                    <div class="process-step animate-fade-in-up md:animate-slide-in-left" style="animation-delay: 0.4s;">
+                         <div class="process-step-number">03</div>
+                         <div class="process-step-content">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Deliver the Solution</h3>
+                            <p class="text-lg font-semibold mb-2 text-nh-light">"Bring the Vision to Life"</p>
+                            <p class="text-nh-light/70 text-sm">We develop, test, and deploy the automation solution, ensuring seamless integration with your existing systems and minimal disruption.</p>
+                        </div>
+                    </div>
+                     <div class="hidden md:block"></div>
+                    <div class="hidden md:block"></div>
+                    <div class="process-step animate-fade-in-up md:animate-slide-in-left md:text-right" style="animation-delay: 0.6s;">
+                        <div class="process-step-number md:ml-auto">04</div>
+                        <div class="process-step-content">
+                            <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Empower and Sustain</h3>
+                            <p class="text-lg font-semibold mb-2 text-nh-light">"Strengthen for the Future"</p>
+                            <p class="text-nh-light/70 text-sm">We provide training, documentation, and ongoing support to ensure your team is empowered and the automation continues to deliver value.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-10 text-accent">Let's Build Your Solution</h2>
-            <div class="max-w-2xl mx-auto bg-gray-800/60 p-8 rounded-lg shadow-xl">
-                <p class="text-center text-gray-300 mb-6">Fill out the form below, and we'll get back to you to discuss how NetHelp can focus on your needs, implement the right solution, and help you excel.</p>
+    <section id="why-us" class="py-16 md:py-24 bg-nh-darker/70">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Why NetHelp?</h2>
+            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
+                We're not just coders; we're your strategic partners in automation.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-nh-light">Innovative Solutions</h3>
+                    <p class="text-nh-light/70 text-sm">As a newer company, we bring fresh perspectives and leverage the latest technologies to create cutting-edge automation.</p>
+                </div>
+                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.2s;">
+                    <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-nh-light">Tailored to You</h3>
+                    <p class="text-nh-light/70 text-sm">We don't believe in one-size-fits-all. Every solution is custom-designed to solve your specific "boss fights."</p>
+                </div>
+                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.4s;">
+                    <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-handshake-angle"></i></div>
+                    <h3 class="text-xl font-semibold mb-2 text-nh-light">Dedicated Partnership</h3>
+                    <p class="text-nh-light/70 text-sm">We're your "power-up" – committed to your success with ongoing support and a focus on long-term value.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <form id="contact-form">
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <section id="contact" class="py-16 md:py-24">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Ready to Level Up Your Business?</h2>
+            <p class="text-center text-nh-light/80 mb-10 md:mb-12 max-w-2xl mx-auto">
+                Tell us about your automation challenge. Let's discuss how NetHelp can be your power-up.
+            </p>
+            <div class="max-w-2xl mx-auto bg-nh-dark p-6 md:p-10 rounded-xl shadow-2xl form-container">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="name" class="block mb-2 text-sm font-medium text-light-text">Your Name <span class="text-red-500">*</span></label>
-                            <input type="text" id="name" name="name" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="John Doe" required>
+                            <label for="name" class="block mb-2 text-sm font-medium text-nh-light">Full Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="Name" class="form-input" placeholder="e.g., Jane Doe" required>
                         </div>
                         <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-light-text">Your Email <span class="text-red-500">*</span></label>
-                            <input type="email" id="email" name="email" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="you@company.com" required>
-                        </div>
-                    </div>
-                     <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="phone" class="block mb-2 text-sm font-medium text-light-text">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="(123) 456-7890">
-                        </div>
-                        <div>
-                            <label for="company" class="block mb-2 text-sm font-medium text-light-text">Company Name (Optional)</label>
-                            <input type="text" id="company" name="company" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="Your Business Inc.">
+                            <label for="email" class="block mb-2 text-sm font-medium text-nh-light">Email Address <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="Email" class="form-input" placeholder="you@example.com" required>
                         </div>
                     </div>
-                    <div class="mb-6">
-                        <label for="service" class="block mb-2 text-sm font-medium text-light-text">Service Interest <span class="text-red-500">*</span></label>
-                        <select id="service" name="service_interest" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" required>
-                            <option value="" disabled selected>Select a service</option>
-                            <option value="IT Support">IT Support</option>
-                            <option value="Custom Excel">Custom Excel Solution</option>
-                            <option value="Automation Tools">Automation Tools</option>
-                            <option value="General Inquiry">General Inquiry</option>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-nh-light">Phone Number</label>
+                            <input type="tel" id="phone" name="Phone" class="form-input" placeholder="(123) 456-7890">
+                        </div>
+                        <div>
+                            <label for="company" class="block mb-2 text-sm font-medium text-nh-light">Company Name</label>
+                            <input type="text" id="company" name="Company" class="form-input" placeholder="Your Business Inc.">
+                        </div>
+                    </div>
+                    <div class="select-wrapper relative">
+                        <label for="service_interest" class="block mb-2 text-sm font-medium text-nh-light">Primary Interest <span class="text-red-500">*</span></label>
+                        <select id="service_interest" name="ServiceInterest" class="form-input custom-select" required>
+                            <option value="" disabled selected class="placeholder-option">Select an area of interest...</option>
+                            <option value="Business Process Analysis & Automation">Business Process Analysis & Automation</option>
+                            <option value="Workflow Automation Design">Workflow Automation Design</option>
+                            <option value="Custom Automation Tool Development">Custom Automation Tool Development</option>
+                            <option value="Data Entry & Processing Automation">Data Entry & Processing Automation</option>
+                            <option value="Automated Reporting Solutions">Automated Reporting Solutions</option>
+                            <option value="Robotic Process Automation (RPA) Inquiry">Robotic Process Automation (RPA) Inquiry</option>
+                            <option value="AI & Machine Learning in Automation">AI & Machine Learning in Automation</option>
+                            <option value="General Automation Consultation">General Automation Consultation</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
-                    <div class="mb-6">
-                        <label for="message" class="block mb-2 text-sm font-medium text-light-text">Your Message <span class="text-red-500">*</span></label>
-                        <textarea id="message" name="message" rows="4" class="bg-gray-700 border border-gray-600 text-light-text text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5" placeholder="Tell us about your project or problem..." required></textarea>
+                    <div>
+                        <label for="message" class="block mb-2 text-sm font-medium text-nh-light">Describe Your Challenge / Needs <span class="text-red-500">*</span></label>
+                        <textarea id="message" name="Message" rows="5" class="form-input" placeholder="Tell us about the repetitive tasks, inefficiencies, or automation goals you have..." required></textarea>
                     </div>
-
-                    <button type="submit" name="submit" class="w-full bg-accent hover:bg-sky-500 text-white font-bold py-3 px-5 rounded-lg transition duration-300 text-lg transform hover:scale-105">
-                        Send Message
-                    </button>
-                    <p id="form-status" class="mt-4 text-center text-sm"></p>
-                     <p class="text-xs text-center text-gray-400 mt-4">
-                       <i class="fa-solid fa-check mr-1"></i> Form submissions handled via Google Apps Script.
-                    </p>
+                    <div>
+                        <button type="submit" id="submit-button" class="w-full bg-nh-accent hover:bg-nh-accent-hover text-white font-bold py-3.5 px-6 rounded-lg transition duration-300 text-lg transform hover:scale-105 custom-button-hover">
+                            Send My Power-Up Request <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                    <p id="form-status" class="mt-4 text-center text-sm h-5"></p>
                 </form>
+
+                <div id="power-up-success" class="hidden text-center py-10 px-6">
+                    <div class="power-up-icon-container mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles text-6xl md:text-7xl text-nh-accent"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-nh-accent mb-3">Power-Up Incoming!</h3>
+                    <p class="text-nh-light/90 text-lg mb-8">Your request has been sent. We'll be in touch soon to supercharge your automation!</p>
+                    <button id="reset-form-button" class="bg-nh-light/20 hover:bg-nh-light/30 text-nh-light font-medium py-2.5 px-6 rounded-lg transition duration-300 text-sm">
+                        Submit Another Request
+                    </button>
                 </div>
+            </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 mt-10">
-        <div class="container mx-auto px-6 py-4 text-center text-gray-500 text-sm">
-            &copy; <span id="current-year"></span> NetHelp. All Rights Reserved.
+    <footer class="bg-nh-darker mt-10 border-t border-nh-dark/50">
+        <div class="container mx-auto px-4 md:px-6 py-8 text-center">
+            <img src="images/logo.jpeg" alt="NetHelp Logo" class="h-12 mx-auto mb-4">
+            <p class="text-nh-light/70 text-sm mb-2">
+                Every Challenge Is a Boss Fight – We’re Your Power-Up.
+            </p>
+            <p class="text-nh-light/50 text-xs">
+                &copy; <span id="current-year"></span> NetHelp Automation Solutions. Site by Musa.
+            </p>
         </div>
     </footer>
 
