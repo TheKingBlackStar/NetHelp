@@ -1,8 +1,8 @@
-// script.js - NetHelp Automation
+// script.js - NETHELP_OS v2.0
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
-    const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbwabJUVWdKe-FzbYv60bVsziB1rJ_oz7kHWvvl-sDIeQTZ1rnhyXp3pEkuvFVrJqGNM/exec'; // YOUR NEW DEPLOYMENT URL
+    const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbwabJUVWdKe-FzbYv60bVsziB1rJ_oz7kHWvvl-sDIeQTZ1rnhyXp3pEkuvFVrJqGNM/exec';
 
     // --- Elements ---
     const header = document.getElementById('header');
@@ -19,14 +19,203 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerLogo = document.querySelector('#header .animated-logo');
     const powerUpSuccessDiv = document.getElementById('power-up-success');
     const resetFormButton = document.getElementById('reset-form-button');
-
+    const utcClock = document.getElementById('utc-clock');
+    const heroHeadline = document.getElementById('hero-headline');
+    const neuralFabricCanvas = document.getElementById('neural-fabric');
+    const terminalLogs = document.getElementById('terminal-logs');
+    const projectCards = document.querySelectorAll('.project-card');
 
     // --- Initialize ---
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
+    // --- UTC Clock ---
+    function updateUTCTime() {
+        if (utcClock) {
+            const now = new Date();
+            const hours = String(now.getUTCHours()).padStart(2, '0');
+            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+            utcClock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+    }
+    updateUTCTime();
+    setInterval(updateUTCTime, 1000);
+
+    // --- Terminal Logging ---
+    function logToTerminal(message) {
+        if (terminalLogs) {
+            const logLine = document.createElement('div');
+            logLine.className = 'terminal-line';
+            logLine.textContent = `> ${message}`;
+            terminalLogs.appendChild(logLine);
+            terminalLogs.scrollTop = terminalLogs.scrollHeight;
+        }
+    }
+
+    // --- Text Scramble Animation ---
+    if (heroHeadline) {
+        const scrambleChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        const originalText = heroHeadline.textContent.trim();
+        const chars = originalText.split('');
+        
+        heroHeadline.textContent = '';
+        chars.forEach((char, index) => {
+            const span = document.createElement('span');
+            span.className = 'scramble-char';
+            if (char === ' ') {
+                span.textContent = ' ';
+                span.style.width = '0.3em';
+            } else {
+                span.textContent = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+            }
+            heroHeadline.appendChild(span);
+            
+            setTimeout(() => {
+                let iterations = 0;
+                const interval = setInterval(() => {
+                    span.textContent = scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    iterations++;
+                    if (iterations > 10) {
+                        span.textContent = char;
+                        clearInterval(interval);
+                    }
+                }, 50);
+            }, index * 30);
+        });
+    }
+
+    // --- Neural Fabric Background ---
+    if (neuralFabricCanvas) {
+        const ctx = neuralFabricCanvas.getContext('2d');
+        let nodes = [];
+        let mouseX = 0;
+        let mouseY = 0;
+        const nodeCount = window.innerWidth < 768 ? 40 : window.innerWidth < 1024 ? 60 : 80;
+        
+        function resizeCanvas() {
+            neuralFabricCanvas.width = window.innerWidth;
+            neuralFabricCanvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Create nodes
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * neuralFabricCanvas.width,
+                y: Math.random() * neuralFabricCanvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: 2 + Math.random() * 2
+            });
+        }
+        
+        // Mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animate() {
+            ctx.clearRect(0, 0, neuralFabricCanvas.width, neuralFabricCanvas.height);
+            
+            // Update and draw nodes
+            nodes.forEach((node, i) => {
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                if (node.x < 0 || node.x > neuralFabricCanvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > neuralFabricCanvas.height) node.vy *= -1;
+                
+                // Check mouse proximity
+                const dx = mouseX - node.x;
+                const dy = mouseY - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = 150;
+                
+                let nodeColor = '#3498DB';
+                let nodeRadius = node.radius;
+                
+                if (distance < maxDistance) {
+                    const intensity = 1 - (distance / maxDistance);
+                    nodeColor = '#F39C12';
+                    nodeRadius = node.radius + intensity * 3;
+                }
+                
+                // Draw node
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, nodeRadius, 0, Math.PI * 2);
+                ctx.fillStyle = nodeColor;
+                ctx.fill();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = nodeColor;
+                
+                // Draw connections
+                nodes.slice(i + 1).forEach(otherNode => {
+                    const dx2 = otherNode.x - node.x;
+                    const dy2 = otherNode.y - node.y;
+                    const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+                    
+                    if (dist2 < 150) {
+                        const opacity = (1 - dist2 / 150) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(otherNode.x, otherNode.y);
+                        ctx.strokeStyle = `rgba(52, 152, 219, ${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // --- Project Card Interactions ---
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const projectName = card.getAttribute('data-project');
+            const projectNames = {
+                'logistics': 'Logistics Matrix',
+                'odoo': 'Odoo Enterprise Cloud',
+                'c1st': 'C1st Automation Hub'
+            };
+            logToTerminal(`User accessed ${projectNames[projectName] || 'Project'}`);
+        });
+    });
+
+    // --- Kinetic Scrolling ---
+    let isScrolling = false;
+    let scrollVelocity = 0;
+    let lastScrollTop = 0;
+    let scrollTimeout;
+    
+    function applyKineticScroll() {
+        if (Math.abs(scrollVelocity) > 0.1) {
+            window.scrollBy(0, scrollVelocity);
+            scrollVelocity *= 0.95; // Deceleration
+            requestAnimationFrame(applyKineticScroll);
+        } else {
+            isScrolling = false;
+        }
+    }
+    
+    window.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaY) > 5) {
+            scrollVelocity = e.deltaY * 0.3;
+            if (!isScrolling) {
+                isScrolling = true;
+                applyKineticScroll();
+            }
+        }
+    }, { passive: true });
+
     // --- Header Scroll Effect ---
+    let lastSection = '';
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 50) {
@@ -36,6 +225,28 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('scrolled');
             if(headerLogo) headerLogo.classList.remove('scrolled-logo-size');
         }
+        
+        // Log section changes
+        const sections = ['hero', 'projects', 'process', 'why-us', 'contact'];
+        sections.forEach(sectionId => {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5) {
+                    if (lastSection !== sectionId) {
+                        lastSection = sectionId;
+                        const sectionNames = {
+                            'hero': 'Hero Section',
+                            'projects': 'Project Architecture',
+                            'process': 'System Process',
+                            'why-us': 'System Capabilities',
+                            'contact': 'Contact Interface'
+                        };
+                        logToTerminal(`Navigated to ${sectionNames[sectionId] || sectionId}`);
+                    }
+                }
+            }
+        });
     });
 
     // --- Mobile Navigation Drawer ---
@@ -150,10 +361,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Contact Form Submission ---
     if (contactForm) {
+        // Log form interactions
+        contactForm.addEventListener('focusin', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                logToTerminal(`Form field accessed: ${e.target.name || e.target.id}`);
+            }
+        });
+        
         contactForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             if (submitButton.disabled) return;
 
+            logToTerminal('Contact form submission initialized');
             formStatus.textContent = 'Sending Power-Up Request...';
             formStatus.className = 'mt-4 text-center text-sm text-nh-light/70 h-5';
             formStatus.classList.remove('hidden');
@@ -204,6 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     try {
                         const result = JSON.parse(responseText);
                         if (result.result === 'success') {
+                            logToTerminal('Contact form submitted successfully');
                             contactForm.classList.add('hidden');
                             formStatus.classList.add('hidden');
                             if(powerUpSuccessDiv) powerUpSuccessDiv.classList.remove('hidden');
@@ -280,4 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.opacity = '0';
         observer.observe(el);
     });
+
+    // Initial terminal log
+    setTimeout(() => {
+        logToTerminal('Neural Fabric network initialized');
+    }, 1000);
 });

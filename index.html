@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetHelp - Automation Power-Up</title>
+    <title>NETHELP_OS v2.0 - Automation Power-Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script>
         tailwind.config = {
           theme: {
             extend: {
               colors: {
+                'nh-base-black': '#050505',
                 'nh-dark': '#2c3e50',
                 'nh-darker': '#233140',
                 'nh-light': '#ecf0f1',
-                'nh-accent': '#f39c12',
+                'nh-accent': '#F39C12',
                 'nh-accent-hover': '#e67e22',
+                'nh-blue': '#3498DB',
+                'nh-terminal-green': '#00ff00',
                 'glass-bg': 'rgba(44, 62, 80, 0.6)',
                 'glass-border': 'rgba(243, 156, 18, 0.3)',
+                'glass-ui': 'rgba(255, 255, 255, 0.05)',
               },
               fontFamily: {
-                sans: ['Roboto', 'sans-serif'],
+                sans: ['Inter Tight', 'sans-serif'],
+                mono: ['JetBrains Mono', 'monospace'],
               },
               animation: {
                 'gradient-bg': 'gradient-bg 15s ease infinite',
@@ -53,13 +58,27 @@
         }
       </script>
 </head>
-<body class="bg-nh-darker text-nh-light font-sans leading-normal tracking-normal">
+<body class="bg-nh-base-black text-nh-light font-sans leading-normal tracking-normal">
 
-    <div class="fixed inset-0 z-[-1] overflow-hidden">
-        <div class="animated-lines"></div>
+    <!-- Neural Fabric Background -->
+    <canvas id="neural-fabric" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- HUD Top Bar -->
+    <div id="hud-bar" class="fixed top-0 left-0 right-0 z-50 hud-bar">
+        <div class="container mx-auto px-4 md:px-6 py-2 flex justify-between items-center text-sm font-mono">
+            <div class="text-nh-light/80">NETHELP_OS // V.2.4</div>
+            <div class="text-nh-light/80">
+                LOCAL_TIME: <span id="utc-clock" class="text-nh-accent">--:--:--</span>
+            </div>
+            <div class="text-nh-light/80">
+                SYSTEM_STATUS: <span class="text-nh-terminal-green flex items-center gap-2">
+                    <span class="status-dot"></span>OPTIMIZED
+                </span>
+            </div>
+        </div>
     </div>
 
-    <header id="header" class="sticky top-0 z-50 bg-nh-dark/90 backdrop-blur-md shadow-lg transition-all duration-300">
+    <header id="header" class="sticky top-0 z-40 bg-nh-base-black/80 backdrop-blur-md shadow-lg transition-all duration-300 mt-8">
         <nav class="container mx-auto px-4 md:px-6 py-3">
             <div class="flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-3">
@@ -98,58 +117,84 @@
     </header>
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
 
-    <section id="hero" class="relative container mx-auto px-4 md:px-6 py-20 md:py-32 text-center overflow-hidden min-h-[calc(100vh-80px)] flex flex-col justify-center items-center">
-        <div class="absolute inset-0 z-[-1] hero-bg-pattern opacity-10"></div>
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in-up hero-headline">
-            <span class="wavychar">E</span><span class="wavychar">v</span><span class="wavychar">e</span><span class="wavychar">r</span><span class="wavychar">y</span> <span class="wavychar">C</span><span class="wavychar">h</span><span class="wavychar">a</span><span class="wavychar">l</span><span class="wavychar">l</span><span class="wavychar">e</span><span class="wavychar">n</span><span class="wavychar">g</span><span class="wavychar">e</span> <span class="wavychar">I</span><span class="wavychar">s</span> <span class="wavychar">a</span> <span class="wavychar">B</span><span class="wavychar">o</span><span class="wavychar">s</span><span class="wavychar">s</span> <span class="wavychar">F</span><span class="wavychar">i</span><span class="wavychar">g</span><span class="wavychar">h</span><span class="wavychar">t</span><span class="text-nh-accent">.</span><br class="hidden md:block">
-            <span class="block mt-2 md:mt-4 text-3xl sm:text-4xl md:text-5xl">
-                <span class="wavychar">W</span><span class="wavychar">e</span><span class="wavychar">’</span><span class="wavychar">r</span><span class="wavychar">e</span> <span class="wavychar">Y</span><span class="wavychar">o</span><span class="wavychar">u</span><span class="wavychar">r</span> <span class="text-nh-accent wavychar">P</span><span class="text-nh-accent wavychar">o</span><span class="text-nh-accent wavychar">w</span><span class="text-nh-accent wavychar">e</span><span class="text-nh-accent wavychar">r</span><span class="text-nh-accent wavychar">-</span><span class="text-nh-accent wavychar">U</span><span class="text-nh-accent wavychar">p</span><span class="text-nh-accent">.</span>
-            </span>
+    <section id="hero" class="relative container mx-auto px-4 md:px-6 py-20 md:py-32 text-center overflow-hidden min-h-[calc(100vh-120px)] flex flex-col justify-center items-center">
+        <h1 id="hero-headline" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight hero-headline-scramble">
+            EVERY CHALLENGE IS A BOSS FIGHT. WE ARE THE POWER-UP.
         </h1>
         <p class="text-base md:text-xl text-nh-light/80 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.3s;">
-            NetHelp delivers intelligent automation solutions that streamline your workflows, eliminate repetitive tasks, and unlock new levels of efficiency for your business.
+            Don't just solve problems. Automate them out of existence.
         </p>
-        <a href="#contact" class="bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-8 py-3 md:px-10 md:py-4 rounded-full text-lg md:text-xl transition duration-300 transform hover:scale-105 animate-fade-in-up custom-button-hover" style="animation-delay: 0.6s;">
-            Unlock Your Automation <i class="fa-solid fa-bolt ml-2"></i>
+        <a href="#contact" class="bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-8 py-3 md:px-10 md:py-4 rounded-full text-lg md:text-xl transition duration-300 transform hover:scale-105 animate-fade-in-up custom-button-hover font-mono" style="animation-delay: 0.6s;">
+            INITIALIZE_PROJECT_CONVERSATION <i class="fa-solid fa-bolt ml-2"></i>
         </a>
     </section>
 
-    <section id="services" class="py-16 md:py-24 bg-nh-darker/70">
+    <section id="projects" class="py-16 md:py-24 relative">
         <div class="container mx-auto px-4 md:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Our Automation Services</h2>
-            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
-                We specialize in crafting bespoke automation solutions to meet your unique business challenges.
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">PROJECT_ARCHITECTURE</h2>
+            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto font-mono text-sm">
+                Active systems and deployment pipelines
             </p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.2s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-cogs fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">Workflow Automation Design</h3>
-                    <p class="text-nh-light/70 text-sm">We analyze your existing processes and design streamlined, automated workflows that save time, reduce errors, and boost productivity from end to end.</p>
+            <div class="bento-grid">
+                <!-- Tile A: Logistics Matrix (Double Wide) -->
+                <div class="bento-tile bento-double project-card" data-project="logistics">
+                    <div class="targeting-brackets">
+                        <div class="bracket bracket-tl"></div>
+                        <div class="bracket bracket-tr"></div>
+                        <div class="bracket bracket-bl"></div>
+                        <div class="bracket bracket-br"></div>
+                    </div>
+                    <div class="project-icon">
+                        <i class="fa-solid fa-table-cells-large text-5xl text-nh-blue"></i>
+                        <div class="pulse-ring"></div>
+                    </div>
+                    <h3 class="text-2xl font-black mb-3 text-nh-light font-mono">LOGISTICS_MATRIX</h3>
+                    <p class="text-nh-light/70 text-sm mb-2 font-mono">Driver_Route_Active_3.0</p>
+                    <p class="text-nh-light/80 text-sm">
+                        Engineered for high-stakes non-medical transport logistics. A Gemini-powered engine that decodes raw chaos into dispatch-ready tables.
+                    </p>
                 </div>
-                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.4s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-robot fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">Custom Automation Tool Development</h3>
-                    <p class="text-nh-light/70 text-sm">Need a specific tool for a unique task? We build custom scripts, bots, and small applications tailored precisely to your automation requirements.</p>
+
+                <!-- Tile B: Odoo Enterprise Cloud (Tall) -->
+                <div class="bento-tile bento-tall project-card" data-project="odoo">
+                    <div class="targeting-brackets">
+                        <div class="bracket bracket-tl"></div>
+                        <div class="bracket bracket-tr"></div>
+                        <div class="bracket bracket-bl"></div>
+                        <div class="bracket bracket-br"></div>
+                    </div>
+                    <div class="project-icon">
+                        <i class="fa-solid fa-server text-4xl text-nh-blue"></i>
+                        <span class="status-dot-live"></span>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-nh-light font-mono">ODOO_ENTERPRISE</h3>
+                    <p class="text-nh-light/70 text-sm mb-2 font-mono">odoo.jstf.help</p>
+                    <p class="text-nh-light/80 text-sm">
+                        Enterprise Resource Planning orchestrated via Docker on Ubuntu Linux. Streamlining church operations through cloud-based automation.
+                    </p>
                 </div>
-                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 0.6s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-database fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">Data Entry & Processing Automation</h3>
-                    <p class="text-nh-light/70 text-sm">Automate the collection, validation, transformation, and migration of data between systems, ensuring accuracy and freeing up your team.</p>
-                </div>
-                <div class="glassmorphism-card animate-fade-in-up lg:col-start-1 lg:col-end-2" style="animation-delay: 0.8s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-chart-line fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">Automated Reporting Solutions</h3>
-                    <p class="text-nh-light/70 text-sm">Get timely insights without the manual grind. We develop systems to automatically generate and distribute custom reports.</p>
-                </div>
-                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 1s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-brain fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">AI & Machine Learning Integration</h3>
-                    <p class="text-nh-light/70 text-sm">Leverage the power of AI for smarter automation, from intelligent document processing to predictive analytics.</p>
-                </div>
-                <div class="glassmorphism-card animate-fade-in-up" style="animation-delay: 1.2s;">
-                    <div class="card-icon text-nh-accent"><i class="fa-solid fa-headset fa-2x"></i></div>
-                    <h3 class="text-xl font-bold mb-3 text-nh-light">Automation Consultation</h3>
-                    <p class="text-nh-light/70 text-sm">Not sure where to start? We provide expert consultation to identify the best automation opportunities within your business.</p>
+
+                <!-- Tile C: C1st Automation Hub (Standard) -->
+                <div class="bento-tile project-card" data-project="c1st">
+                    <div class="targeting-brackets">
+                        <div class="bracket bracket-tl"></div>
+                        <div class="bracket bracket-tr"></div>
+                        <div class="bracket bracket-bl"></div>
+                        <div class="bracket bracket-br"></div>
+                    </div>
+                    <div class="project-icon">
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-black mb-3 text-nh-light font-mono">C1ST_AUTOMATION_HUB</h3>
+                    <p class="text-nh-light/70 text-sm mb-2 font-mono">c1st.jstf.help</p>
+                    <p class="text-nh-light/80 text-sm mb-3">
+                        The central interface for C1st business intelligence. Status: Deployment in progress.
+                    </p>
+                    <div class="status-text font-mono text-nh-accent">
+                        INITIALIZING<span class="blink-cursor">_</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,7 +202,7 @@
 
     <section id="process" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Your Automation Journey</h2>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">SYSTEM_PROCESS</h2>
             <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
                 We follow a clear, collaborative process to power-up your business.
             </p>
@@ -205,9 +250,9 @@
         </div>
     </section>
 
-    <section id="why-us" class="py-16 md:py-24 bg-nh-darker/70">
+    <section id="why-us" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Why NetHelp?</h2>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">SYSTEM_CAPABILITIES</h2>
             <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
                 We're not just coders; we're your strategic partners in automation.
             </p>
@@ -233,11 +278,11 @@
 
     <section id="contact" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-nh-accent">Ready to Level Up Your Business?</h2>
-            <p class="text-center text-nh-light/80 mb-10 md:mb-12 max-w-2xl mx-auto">
-                Tell us about your automation challenge. Let's discuss how NetHelp can be your power-up.
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">INITIALIZE_CONNECTION</h2>
+            <p class="text-center text-nh-light/80 mb-10 md:mb-12 max-w-2xl mx-auto font-mono text-sm">
+                > Ready to automate your challenges? Initialize project conversation.
             </p>
-            <div class="max-w-2xl mx-auto bg-nh-dark p-6 md:p-10 rounded-xl shadow-2xl form-container">
+            <div class="max-w-2xl mx-auto terminal-form p-6 md:p-10 shadow-2xl form-container">
                 <form id="contact-form" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -279,8 +324,8 @@
                         <textarea id="message" name="Message" rows="5" class="form-input" placeholder="Tell us about the repetitive tasks, inefficiencies, or automation goals you have..." required></textarea>
                     </div>
                     <div>
-                        <button type="submit" id="submit-button" class="w-full bg-nh-accent hover:bg-nh-accent-hover text-white font-bold py-3.5 px-6 rounded-lg transition duration-300 text-lg transform hover:scale-105 custom-button-hover">
-                            Send My Power-Up Request <i class="fas fa-paper-plane ml-2"></i>
+                        <button type="submit" id="submit-button" class="w-full bg-nh-accent hover:bg-nh-accent-hover text-white font-bold py-3.5 px-6 rounded-lg transition duration-300 text-lg transform hover:scale-105 custom-button-hover font-mono">
+                            INITIALIZE_PROJECT_CONVERSATION <i class="fas fa-paper-plane ml-2"></i>
                         </button>
                     </div>
                     <p id="form-status" class="mt-4 text-center text-sm h-5"></p>
@@ -300,15 +345,13 @@
         </div>
     </section>
 
-    <footer class="bg-nh-darker mt-10 border-t border-nh-dark/50">
-        <div class="container mx-auto px-4 md:px-6 py-8 text-center">
-            <img src="images/logo.jpeg" alt="NetHelp Logo" class="h-12 mx-auto mb-4">
-            <p class="text-nh-light/70 text-sm mb-2">
-                Every Challenge Is a Boss Fight – We’re Your Power-Up.
-            </p>
-            <p class="text-nh-light/50 text-xs">
-                &copy; <span id="current-year"></span> NetHelp Automation Solutions. Site by Musa.
-            </p>
+    <!-- Terminal Footer -->
+    <footer id="terminal-footer" class="fixed bottom-0 left-0 right-0 z-50 terminal-footer">
+        <div class="terminal-content font-mono text-xs">
+            <div id="terminal-logs" class="terminal-logs">
+                <div class="terminal-line">> System initialized</div>
+                <div class="terminal-line">> NETHELP_OS v2.0 loaded</div>
+            </div>
         </div>
     </footer>
 
