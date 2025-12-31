@@ -1468,6 +1468,111 @@ body {
     display: block;
 }
 
+/* Odoo Cost Guide */
+.odoo-cost-guide {
+    background: var(--glass-ui);
+    border: 1px solid var(--glass-ui);
+    border-radius: 1rem;
+    padding: 1.25rem;
+}
+.odoo-cost-title {
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.35rem;
+}
+.odoo-cost-subtitle {
+    margin-bottom: 1rem;
+}
+.odoo-cost-legend {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0.9rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 1rem;
+}
+.odoo-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.odoo-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(236, 240, 241, 0.9);
+    white-space: nowrap;
+}
+.odoo-pill-active {
+    border-color: rgba(0, 255, 0, 0.22);
+    background: rgba(0, 255, 0, 0.08);
+    color: rgba(0, 255, 0, 0.9);
+}
+.odoo-pill-upgrade {
+    border-color: rgba(243, 156, 18, 0.35);
+    background: rgba(243, 156, 18, 0.10);
+    color: var(--nh-accent);
+}
+.odoo-pill-learn {
+    border-color: rgba(52, 152, 219, 0.35);
+    background: rgba(52, 152, 219, 0.10);
+    color: var(--nh-blue);
+}
+.odoo-legend-text {
+    color: rgba(236, 240, 241, 0.78);
+    font-size: 0.85rem;
+}
+.odoo-cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.odoo-cost-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.85rem;
+    padding: 1rem;
+}
+.odoo-cost-card-title {
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
+}
+.odoo-cost-list {
+    padding-left: 1.1rem;
+    color: rgba(236, 240, 241, 0.82);
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+.odoo-cost-list li {
+    margin: 0.35rem 0;
+}
+.odoo-cost-note {
+    margin-top: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .odoo-cost-guide {
+        padding: 1rem;
+    }
+    .odoo-cost-grid {
+        grid-template-columns: 1fr;
+    }
+    .odoo-legend-text {
+        font-size: 0.8rem;
+    }
+    .odoo-cost-list {
+        font-size: 0.82rem;
+    }
+}
+
 .video-overlay-info {
     position: absolute;
     top: 50%;
