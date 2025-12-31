@@ -117,6 +117,8 @@ body {
 
 .project-card {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-icon {
@@ -713,7 +715,9 @@ body {
 }
 
 .project-content.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 @keyframes fadeIn {
@@ -730,6 +734,9 @@ body {
 /* Simple View Styling */
 .simple-explanation {
     padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .simple-explanation p {
@@ -766,6 +773,16 @@ body {
 /* Technical View Styling */
 .tech-showcase {
     padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Keep demo buttons aligned at the bottom of cards */
+.simple-explanation .demo-button,
+.tech-showcase .demo-button {
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .tech-badge-row {

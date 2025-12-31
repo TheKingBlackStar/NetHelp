@@ -73,16 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!bootLoader) return () => {};
 
         const lines = [
-            'Warming up the automation engine…',
-            'Negotiating with the laws of physics…',
-            'Aligning drivers, routes, and reality…',
-            'Assembling spreadsheets into strategy…',
-            'Calibrating duplicate-detection sensors…',
-            'Ensuring vehicles are, in fact, vehicles…',
-            'Loading best practices (and good vibes)…',
-            'Compiling professional excellence…',
-            'Optimizing for humans, not just computers…',
-            'Boot sequence: unusually satisfying…'
+            'Initializing user interface…',
+            'Loading configuration…',
+            'Loading demo data…',
+            'Validating business rules…',
+            'Preparing interactive views…',
+            'Optimizing performance…',
+            'Applying security controls…',
+            'Final checks…'
         ];
 
         let idx = 0;
@@ -635,7 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (submitButton.disabled) return;
 
             logToTerminal('Contact form submission initialized');
-            formStatus.textContent = 'Sending Power-Up Request...';
+            formStatus.textContent = 'Sending request...';
             formStatus.className = 'mt-4 text-center text-sm text-nh-light/70 h-5';
             formStatus.classList.remove('hidden');
 
@@ -741,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(submitButton) {
                 submitButton.disabled = false;
                 submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
-                const originalButtonText = 'Send My Power-Up Request <i class="fas fa-paper-plane ml-2"></i>';
+                const originalButtonText = 'Send Request <i class="fas fa-paper-plane ml-2"></i>';
                 submitButton.innerHTML = originalButtonText;
             }
         });
