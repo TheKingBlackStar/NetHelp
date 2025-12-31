@@ -118,10 +118,23 @@
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
 
     <section id="hero" class="relative container mx-auto px-4 md:px-6 py-20 md:py-32 text-center overflow-hidden min-h-[calc(100vh-120px)] flex flex-col justify-center items-center">
-        <h1 id="hero-headline" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight hero-headline-scramble">
-            EVERY CHALLENGE IS A BOSS FIGHT. WE ARE THE POWER-UP.
+        <h1 id="hero-headline" class="hero-headline-scramble hero-title-animated">
+            <span class="hero-title-line hero-title-primary">
+                <span class="word">EVERY</span> <span class="word">CHALLENGE</span> <span class="word">IS</span> <span class="word">A</span> <span class="word">BOSS</span> <span class="word">FIGHT.</span>
+            </span>
+            <span class="hero-title-line hero-title-accent">
+                <span class="word">WE</span> <span class="word">ARE</span> <span class="word">THE</span> <span class="word">POWER-UP.</span>
+            </span>
         </h1>
-        <p class="text-base md:text-xl text-nh-light/80 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.3s;">
+        <div class="max-w-4xl mx-auto mb-8">
+            <p class="text-base md:text-xl text-nh-light/90 mb-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <span class="font-semibold text-nh-accent">For Business Leaders:</span> We turn your repetitive tasks into automated workflows. No technical knowledge required—we handle the complexity so you can focus on what matters.
+            </p>
+            <p class="text-base md:text-xl text-nh-light/90 animate-fade-in-up font-mono text-sm md:text-base" style="animation-delay: 0.4s;">
+                <span class="font-semibold text-nh-blue">For Technical Teams:</span> Enterprise-grade automation built with modern stacks. Python, Docker, APIs, cloud infrastructure—we speak your language and deliver production-ready solutions.
+            </p>
+        </div>
+        <p class="text-base md:text-lg text-nh-light/70 mb-10 max-w-3xl mx-auto animate-fade-in-up italic" style="animation-delay: 0.5s;">
             Don't just solve problems. Automate them out of existence.
         </p>
         <a href="#contact" class="bg-nh-accent hover:bg-nh-accent-hover text-white font-bold px-8 py-3 md:px-10 md:py-4 rounded-full text-lg md:text-xl transition duration-300 transform hover:scale-105 animate-fade-in-up custom-button-hover font-mono" style="animation-delay: 0.6s;">
@@ -150,9 +163,100 @@
                     </div>
                     <h3 class="text-2xl font-black mb-3 text-nh-light font-mono">LOGISTICS_MATRIX</h3>
                     <p class="text-nh-light/70 text-sm mb-2 font-mono">Driver_Route_Active_3.0</p>
-                    <p class="text-nh-light/80 text-sm">
-                        Engineered for high-stakes non-medical transport logistics. A Gemini-powered engine that decodes raw chaos into dispatch-ready tables.
-                    </p>
+                    
+                    <!-- View Toggle -->
+                    <div class="view-toggle mb-3 flex gap-2">
+                        <button class="view-btn active" data-view="simple" data-project="logistics">Simple</button>
+                        <button class="view-btn" data-view="technical" data-project="logistics">Technical</button>
+                    </div>
+                    
+                    <!-- Simple View -->
+                    <div class="project-content simple-view active">
+                        <div class="simple-explanation">
+                            <p class="text-nh-light text-base mb-4 leading-relaxed">
+                                <span class="text-2xl">📋</span><br>
+                                <strong class="text-nh-accent text-lg">Think of it like a smart assistant:</strong><br>
+                                You give it messy information, and it turns it into a clean, organized schedule—automatically.
+                            </p>
+                            <p class="text-nh-light text-base mb-4 leading-relaxed">
+                                <span class="text-2xl">⏰</span><br>
+                                <strong class="text-nh-accent text-lg">Saves you time:</strong><br>
+                                What used to take hours of copying and pasting now happens in seconds.
+                            </p>
+                            <p class="text-nh-light text-base mb-4 leading-relaxed">
+                                <span class="text-2xl">✅</span><br>
+                                <strong class="text-nh-accent text-lg">Fewer mistakes:</strong><br>
+                                No more typos or missed appointments. The system catches errors before they happen.
+                            </p>
+                            <a href="#excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-accent hover:bg-nh-accent-hover text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                                <i class="fa-solid fa-play-circle"></i>
+                                SEE DEMO
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Technical View -->
+                    <div class="project-content technical-view">
+                        <div class="tech-showcase">
+                            <div class="tech-badge-row mb-4">
+                                <span class="tech-badge">Python 3.11+</span>
+                                <span class="tech-badge">Gemini API</span>
+                                <span class="tech-badge">Regex Engine</span>
+                                <span class="tech-badge">CSV Parser</span>
+                            </div>
+                            <div class="tech-code-block mb-3">
+                                <div class="code-header">
+                                    <span class="code-dot"></span>
+                                    <span class="code-dot"></span>
+                                    <span class="code-dot"></span>
+                                    <span class="code-title">logistics_engine.py</span>
+                                </div>
+                                <pre class="code-content"><code>def process_route_data(raw_input):
+    # AI-powered NLP extraction
+    structured = gemini_api.parse(raw_input)
+    # Validation & normalization
+    validated = validate_rules(structured)
+    # Generate dispatch table
+    return generate_excel_output(validated)</code></pre>
+                            </div>
+                            <div class="tech-features">
+                                <div class="tech-feature-item">
+                                    <i class="fa-solid fa-brain text-nh-blue"></i>
+                                    <span>AI-Powered NLP Pipeline</span>
+                                </div>
+                                <div class="tech-feature-item">
+                                    <i class="fa-solid fa-shield-halved text-nh-blue"></i>
+                                    <span>Business Rule Validation</span>
+                                </div>
+                                <div class="tech-feature-item">
+                                    <i class="fa-solid fa-bolt text-nh-blue"></i>
+                                    <span>Real-time Processing</span>
+                                </div>
+                                <div class="tech-feature-item">
+                                    <i class="fa-solid fa-magnifying-glass text-nh-blue"></i>
+                                    <span>Intelligent Field Mapping</span>
+                                </div>
+                            </div>
+                            <div class="tech-stats mt-4">
+                                <div class="tech-stat">
+                                    <div class="stat-value">99.7%</div>
+                                    <div class="stat-label">Accuracy</div>
+                                </div>
+                                <div class="tech-stat">
+                                    <div class="stat-value">&lt;2s</div>
+                                    <div class="stat-label">Processing</div>
+                                </div>
+                                <div class="tech-stat">
+                                    <div class="stat-value">0</div>
+                                    <div class="stat-label">Manual Work</div>
+                                </div>
+                            </div>
+                            <a href="#excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-blue hover:bg-opacity-80 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                                <i class="fa-solid fa-code"></i>
+                                VIEW LIVE DEMO
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Tile B: Odoo Enterprise Cloud (Tall) -->
@@ -169,9 +273,35 @@
                     </div>
                     <h3 class="text-xl font-black mb-3 text-nh-light font-mono">ODOO_ENTERPRISE</h3>
                     <p class="text-nh-light/70 text-sm mb-2 font-mono">odoo.jstf.help</p>
-                    <p class="text-nh-light/80 text-sm">
-                        Enterprise Resource Planning orchestrated via Docker on Ubuntu Linux. Streamlining church operations through cloud-based automation.
-                    </p>
+                    
+                    <!-- View Toggle -->
+                    <div class="view-toggle mb-3 flex gap-2">
+                        <button class="view-btn active" data-view="simple" data-project="odoo">Simple</button>
+                        <button class="view-btn" data-view="technical" data-project="odoo">Technical</button>
+                    </div>
+                    
+                    <!-- Simple View -->
+                    <div class="project-content simple-view active">
+                        <p class="text-nh-light/80 text-sm mb-3">
+                            <strong class="text-nh-accent">What it does:</strong> A complete business management system in the cloud that handles everything from member databases to event scheduling, donations, and reporting—all in one place.
+                        </p>
+                        <p class="text-nh-light/80 text-sm">
+                            <strong class="text-nh-accent">Why it matters:</strong> No more switching between different apps or spreadsheets. Everything your organization needs is accessible from anywhere, with automatic backups and updates.
+                        </p>
+                    </div>
+                    
+                    <!-- Technical View -->
+                    <div class="project-content technical-view">
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-blue">Stack:</strong> Odoo 17, Docker, Ubuntu 22.04 LTS, Nginx reverse proxy, PostgreSQL, Let's Encrypt SSL
+                        </p>
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-blue">Infrastructure:</strong> Containerized deployment on VPS, automated backups, CI/CD pipeline, monitoring with health checks
+                        </p>
+                        <p class="text-nh-light/80 text-sm">
+                            <strong class="text-nh-blue">Custom Modules:</strong> Church-specific workflows, automated reporting, integration APIs, custom dashboards
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Tile C: C1st Automation Hub (Standard) -->
@@ -189,11 +319,282 @@
                     </div>
                     <h3 class="text-xl font-black mb-3 text-nh-light font-mono">C1ST_AUTOMATION_HUB</h3>
                     <p class="text-nh-light/70 text-sm mb-2 font-mono">c1st.jstf.help</p>
-                    <p class="text-nh-light/80 text-sm mb-3">
-                        The central interface for C1st business intelligence. Status: Deployment in progress.
-                    </p>
-                    <div class="status-text font-mono text-nh-accent">
-                        INITIALIZING<span class="blink-cursor">_</span>
+                    
+                    <!-- View Toggle -->
+                    <div class="view-toggle mb-3 flex gap-2">
+                        <button class="view-btn active" data-view="simple" data-project="c1st">Simple</button>
+                        <button class="view-btn" data-view="technical" data-project="c1st">Technical</button>
+                    </div>
+                    
+                    <!-- Simple View -->
+                    <div class="project-content simple-view active">
+                        <p class="text-nh-light/80 text-sm mb-3">
+                            <strong class="text-nh-accent">What it does:</strong> A central dashboard that brings together all your business data, showing you insights and trends at a glance so you can make better decisions faster.
+                        </p>
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-accent">Why it matters:</strong> Instead of digging through multiple systems, you get one clear view of what's happening in your business right now.
+                        </p>
+                        <div class="status-text font-mono text-nh-accent text-xs">
+                            INITIALIZING<span class="blink-cursor">_</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Technical View -->
+                    <div class="project-content technical-view">
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-blue">Stack:</strong> React, Node.js, REST APIs, Data visualization libraries, Real-time WebSocket connections
+                        </p>
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-blue">Architecture:</strong> Microservices-based BI platform with data aggregation layer, real-time analytics engine, customizable dashboard framework
+                        </p>
+                        <p class="text-nh-light/80 text-sm mb-2">
+                            <strong class="text-nh-blue">Status:</strong> Phase 2/3 complete - Core infrastructure deployed, dashboard framework in progress (65%)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Stack Section -->
+    <section id="tech-stack" class="py-16 md:py-24 relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">TECHNICAL_STACK</h2>
+            <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
+                For those who want to know what's under the hood
+            </p>
+            <p class="text-center text-nh-light/60 text-sm mb-12 max-w-2xl mx-auto">
+                (Don't worry if this looks like alphabet soup—we'll explain everything in plain English)
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-brands fa-python text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Python</h3>
+                    <p class="text-xs text-nh-light/70">Scripts, APIs, data processing, AI integration</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-brands fa-docker text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Docker</h3>
+                    <p class="text-xs text-nh-light/70">Containerized deployments, scalable infrastructure</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-brands fa-aws text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Cloud</h3>
+                    <p class="text-xs text-nh-light/70">AWS, GCP, Azure, VPS hosting solutions</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-solid fa-database text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Databases</h3>
+                    <p class="text-xs text-nh-light/70">PostgreSQL, MySQL, MongoDB, Redis</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-brands fa-js text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">JavaScript</h3>
+                    <p class="text-xs text-nh-light/70">Node.js, React, automation scripts</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-solid fa-robot text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">AI/ML</h3>
+                    <p class="text-xs text-nh-light/70">OpenAI, Gemini, custom models, NLP</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-solid fa-plug text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Integrations</h3>
+                    <p class="text-xs text-nh-light/70">REST APIs, webhooks, Zapier, custom connectors</p>
+                </div>
+                <div class="tech-stack-card">
+                    <div class="tech-icon text-nh-blue mb-3"><i class="fa-solid fa-shield-halved text-4xl"></i></div>
+                    <h3 class="font-bold mb-2 font-mono">Security</h3>
+                    <p class="text-xs text-nh-light/70">SSL/TLS, OAuth, encryption, compliance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Excel Viewer Section -->
+    <section id="excel-demo" class="py-16 md:py-24 relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">LOGISTICS_MATRIX_DEMO</h2>
+            <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
+                Experience the power of our automation system
+            </p>
+            <p class="text-center text-nh-light/60 text-sm mb-8 max-w-2xl mx-auto font-mono">
+                > View-only mode active. Copy, paste, and download disabled for security.
+            </p>
+            <!-- Demo Explanation Panel -->
+            <div class="max-w-6xl mx-auto mb-6">
+                <details class="excel-help-panel">
+                    <summary class="excel-help-summary font-mono">
+                        HOW_THIS_DEMO_WORKS <span class="excel-help-hint">(click to expand)</span>
+                    </summary>
+                    <div class="excel-help-body">
+                        <div class="excel-help-grid">
+                            <div class="excel-help-card">
+                                <div class="excel-help-title font-mono text-nh-accent">What you can do</div>
+                                <ul class="excel-help-list font-mono">
+                                    <li><strong>Assignments:</strong> Use the <strong>Driver</strong> and <strong>Vehicle</strong> dropdowns (no typing).</li>
+                                    <li><strong>Auto-fill:</strong> When you choose a Vehicle, the system fills <strong>Vehicle ID</strong>, <strong>VIN</strong>, and <strong>Vehicle Status</strong> automatically.</li>
+                                    <li><strong>Driver View:</strong> Automatically generates a clean list for drivers (only vehicles that are <strong>Active</strong> or <strong>Needs Service</strong>).</li>
+                                    <li><strong>Reset:</strong> Refreshing the page restores the original demo data.</li>
+                                </ul>
+                            </div>
+                            <div class="excel-help-card">
+                                <div class="excel-help-title font-mono text-nh-blue">What you cannot do</div>
+                                <ul class="excel-help-list font-mono">
+                                    <li><strong>No free editing:</strong> You cannot type into cells or change the route names.</li>
+                                    <li><strong>No copy/paste:</strong> Copy, paste, right-click, and download are disabled for demo security.</li>
+                                </ul>
+                            </div>
+                            <div class="excel-help-card">
+                                <div class="excel-help-title font-mono text-nh-accent">Color legend</div>
+                                <div class="excel-help-legend font-mono">
+                                    <div class="excel-help-legend-item">
+                                        <span class="excel-help-swatch is-duplicate"></span>
+                                        Duplicate detected (same Driver, Vehicle, or VIN used more than once)
+                                    </div>
+                                    <div class="excel-help-legend-item">
+                                        <span class="excel-help-swatch status-active"></span>
+                                        Active
+                                    </div>
+                                    <div class="excel-help-legend-item">
+                                        <span class="excel-help-swatch status-needs-service"></span>
+                                        Needs Service
+                                    </div>
+                                    <div class="excel-help-legend-item">
+                                        <span class="excel-help-swatch status-in-service"></span>
+                                        In Service
+                                    </div>
+                                    <div class="excel-help-legend-item">
+                                        <span class="excel-help-swatch status-out-of-service"></span>
+                                        Out of Service
+                                    </div>
+                                </div>
+                                <p class="excel-help-note font-mono text-xs text-nh-light/70 mt-3">
+                                    Note: Duplicate highlighting applies only to the active assignment list (stops at the first blank Run/Route row), matching the workbook workflow.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="max-w-6xl mx-auto">
+                <div class="excel-viewer-container">
+                    <!-- Tab Navigation for Multiple Sheets -->
+                    <div class="excel-tabs" id="excel-tabs">
+                        <button class="excel-tab active" data-sheet="assignments">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <span>Assignments</span>
+                        </button>
+                        <button class="excel-tab" data-sheet="driverView">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <span>Driver View</span>
+                        </button>
+                        <button class="excel-tab" data-sheet="employees">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <span>Employees</span>
+                        </button>
+                        <button class="excel-tab" data-sheet="vehicles">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <span>Vehicles</span>
+                        </button>
+                        <button class="excel-tab" data-sheet="lists">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <span>Lists</span>
+                        </button>
+                    </div>
+
+                    <!-- Per-tab explanation -->
+                    <div class="excel-sheet-info" id="excel-sheet-info" aria-live="polite">
+                        <div class="excel-sheet-info-title font-mono" id="excel-sheet-info-title">Assignments</div>
+                        <div class="excel-sheet-info-text font-mono" id="excel-sheet-info-text">
+                            Build the daily dispatch plan. Choose a Driver and Vehicle for each Run/Route. Vehicle ID, VIN, and Status auto-fill from the Vehicles database. Duplicate and status highlighting helps catch problems fast.
+                        </div>
+                    </div>
+                    
+                    <div class="excel-viewer-overlay" id="excel-overlay"></div>
+                    <div class="excel-viewer-wrapper" id="excel-viewer">
+                        <!-- Assignments -->
+                        <div class="excel-sheet active" id="assignments" data-sheet="assignments">
+                            <div class="excel-table-container" id="assignments-container">
+                                <div class="excel-date-header font-mono text-xl font-bold mb-4 text-center text-nh-accent" id="assignments-date">--/--/----</div>
+                                <div class="excel-placeholder font-mono text-sm text-nh-light/70">Loading Assignments…</div>
+                            </div>
+                        </div>
+
+                        <!-- Driver View -->
+                        <div class="excel-sheet" id="driverView" data-sheet="driverView">
+                            <div class="excel-table-container" id="driver-view-container">
+                                <div class="excel-date-header font-mono text-xl font-bold mb-4 text-center text-nh-accent" id="driver-view-date">--/--/----</div>
+                                <div class="excel-placeholder font-mono text-sm text-nh-light/70">Loading Driver View…</div>
+                            </div>
+                        </div>
+
+                        <!-- Employees -->
+                        <div class="excel-sheet" id="employees" data-sheet="employees">
+                            <div class="excel-table-container" id="employees-container">
+                                <div class="excel-date-header font-mono text-xl font-bold mb-4 text-center text-nh-terminal-green">Employees</div>
+                                <div class="excel-placeholder font-mono text-sm text-nh-light/70">Loading Employees…</div>
+                            </div>
+                        </div>
+
+                        <!-- Vehicles -->
+                        <div class="excel-sheet" id="vehicles" data-sheet="vehicles">
+                            <div class="excel-table-container" id="vehicles-container">
+                                <div class="excel-date-header font-mono text-xl font-bold mb-4 text-center text-nh-blue">Vehicles</div>
+                                <div class="excel-placeholder font-mono text-sm text-nh-light/70">Loading Vehicles…</div>
+                            </div>
+                        </div>
+
+                        <!-- Lists -->
+                        <div class="excel-sheet" id="lists" data-sheet="lists">
+                            <div class="excel-table-container" id="lists-container">
+                                <div class="excel-date-header font-mono text-xl font-bold mb-4 text-center text-nh-accent">Lists</div>
+                                <div class="excel-placeholder font-mono text-sm text-nh-light/70">Loading Lists…</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="excel-security-notice">
+                        <i class="fa-solid fa-shield-halved text-nh-accent"></i>
+                        <span class="font-mono text-xs">Protected View - Interactive but Secure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Odoo Demo Section -->
+    <section id="odoo-demo" class="py-16 md:py-24 relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">ODOO_ENTERPRISE_DEMO</h2>
+            <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
+                See our Odoo implementation in action
+            </p>
+            <p class="text-center text-nh-light/60 text-sm mb-8 max-w-2xl mx-auto font-mono">
+                > Video demonstration of system capabilities
+            </p>
+            <div class="max-w-5xl mx-auto">
+                <div class="video-demo-container">
+                    <div class="video-wrapper">
+                        <video 
+                            id="odoo-demo-video" 
+                            class="demo-video" 
+                            controls 
+                            controlsList="nodownload noplaybackrate"
+                            disablePictureInPicture
+                            preload="metadata"
+                            poster="images/odoo-demo-poster.jpg">
+                            <source src="videos/odoo-demo.mp4" type="video/mp4">
+                            <source src="videos/odoo-demo.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-overlay-info">
+                            <i class="fa-solid fa-play-circle text-nh-accent"></i>
+                            <span class="font-mono text-sm">Click to play demo</span>
+                        </div>
+                    </div>
+                    <div class="video-security-notice">
+                        <i class="fa-solid fa-lock text-nh-blue"></i>
+                        <span class="font-mono text-xs">Demo Mode - No data access</span>
                     </div>
                 </div>
             </div>
@@ -203,8 +604,11 @@
     <section id="process" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-6">
             <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">SYSTEM_PROCESS</h2>
-            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
+            <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
                 We follow a clear, collaborative process to power-up your business.
+            </p>
+            <p class="text-center text-nh-light/60 text-sm mb-12 max-w-2xl mx-auto">
+                (Each step includes both simple explanations and technical implementation details)
             </p>
             <div class="relative">
                 <div class="hidden md:block absolute top-5 left-1/2 w-1 bg-nh-accent/30 h-[calc(100%-2.5rem)] -translate-x-1/2"></div>
@@ -214,7 +618,12 @@
                         <div class="process-step-content">
                             <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Identify the Need</h3>
                             <p class="text-lg font-semibold mb-2 text-nh-light">"Uncover the Challenge"</p>
-                            <p class="text-nh-light/70 text-sm">We start by thoroughly understanding your current processes, pain points, and objectives to pinpoint the most impactful automation opportunities.</p>
+                            <p class="text-nh-light/80 text-sm mb-3">
+                                <strong class="text-nh-accent">Simple:</strong> We sit down with you, watch how you work, and identify the repetitive tasks that eat up your time.
+                            </p>
+                            <p class="text-nh-light/70 text-sm font-mono text-xs border-l-2 border-nh-blue pl-3">
+                                <strong class="text-nh-blue">Technical:</strong> Process mapping, workflow analysis, bottleneck identification, ROI calculation, technical feasibility assessment
+                            </p>
                         </div>
                     </div>
                     <div class="hidden md:block"></div>
@@ -224,7 +633,12 @@
                          <div class="process-step-content">
                             <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Craft the Solution</h3>
                             <p class="text-lg font-semibold mb-2 text-nh-light">"Blueprint the Path"</p>
-                            <p class="text-nh-light/70 text-sm">Our experts design a tailored automation strategy and solution architecture, outlining the technology, tools, and steps for implementation.</p>
+                            <p class="text-nh-light/80 text-sm mb-3">
+                                <strong class="text-nh-accent">Simple:</strong> We design a step-by-step plan showing exactly how automation will work for you, with clear timelines and expectations.
+                            </p>
+                            <p class="text-nh-light/70 text-sm font-mono text-xs border-l-2 border-nh-blue pl-3">
+                                <strong class="text-nh-blue">Technical:</strong> System architecture design, technology stack selection, API integration planning, database schema, security protocols, deployment strategy
+                            </p>
                         </div>
                     </div>
                     <div class="process-step animate-fade-in-up md:animate-slide-in-left" style="animation-delay: 0.4s;">
@@ -232,7 +646,12 @@
                          <div class="process-step-content">
                             <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Deliver the Solution</h3>
                             <p class="text-lg font-semibold mb-2 text-nh-light">"Bring the Vision to Life"</p>
-                            <p class="text-nh-light/70 text-sm">We develop, test, and deploy the automation solution, ensuring seamless integration with your existing systems and minimal disruption.</p>
+                            <p class="text-nh-light/80 text-sm mb-3">
+                                <strong class="text-nh-accent">Simple:</strong> We build it, test it thoroughly, and make sure it works perfectly before you ever see it. Then we set it up so it runs automatically.
+                            </p>
+                            <p class="text-nh-light/70 text-sm font-mono text-xs border-l-2 border-nh-blue pl-3">
+                                <strong class="text-nh-blue">Technical:</strong> Agile development, version control (Git), automated testing, CI/CD pipelines, staging environment validation, production deployment with rollback capability
+                            </p>
                         </div>
                     </div>
                      <div class="hidden md:block"></div>
@@ -242,7 +661,12 @@
                         <div class="process-step-content">
                             <h3 class="text-xl md:text-2xl font-bold mb-2 text-nh-accent">Empower and Sustain</h3>
                             <p class="text-lg font-semibold mb-2 text-nh-light">"Strengthen for the Future"</p>
-                            <p class="text-nh-light/70 text-sm">We provide training, documentation, and ongoing support to ensure your team is empowered and the automation continues to deliver value.</p>
+                            <p class="text-nh-light/80 text-sm mb-3">
+                                <strong class="text-nh-accent">Simple:</strong> We teach your team how to use it, provide easy-to-follow guides, and are always available if you need help or want to add new features.
+                            </p>
+                            <p class="text-nh-light/70 text-sm font-mono text-xs border-l-2 border-nh-blue pl-3">
+                                <strong class="text-nh-blue">Technical:</strong> Comprehensive documentation, API references, monitoring dashboards, error logging, performance metrics, 24/7 support, version updates, scalability planning
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -253,24 +677,42 @@
     <section id="why-us" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-6">
             <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">SYSTEM_CAPABILITIES</h2>
-            <p class="text-center text-nh-light/80 mb-12 md:mb-16 max-w-2xl mx-auto">
+            <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
                 We're not just coders; we're your strategic partners in automation.
             </p>
+            <p class="text-center text-nh-light/60 text-sm mb-12 max-w-2xl mx-auto">
+                (We speak both business and technical languages fluently)
+            </p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300">
+                <div class="p-6 bg-glass-ui backdrop-blur-sm border border-glass-ui rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300">
                     <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-lightbulb"></i></div>
                     <h3 class="text-xl font-semibold mb-2 text-nh-light">Innovative Solutions</h3>
-                    <p class="text-nh-light/70 text-sm">As a newer company, we bring fresh perspectives and leverage the latest technologies to create cutting-edge automation.</p>
+                    <p class="text-nh-light/80 text-sm mb-2">
+                        <strong class="text-nh-accent">For Everyone:</strong> We use the latest tools and fresh ideas to solve your problems in ways that actually work.
+                    </p>
+                    <p class="text-nh-light/60 text-xs font-mono border-l-2 border-nh-blue pl-2">
+                        <strong class="text-nh-blue">Tech Note:</strong> Modern stack, AI integration, cloud-native architecture, scalable design patterns
+                    </p>
                 </div>
-                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.2s;">
+                <div class="p-6 bg-glass-ui backdrop-blur-sm border border-glass-ui rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.2s;">
                     <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-puzzle-piece"></i></div>
                     <h3 class="text-xl font-semibold mb-2 text-nh-light">Tailored to You</h3>
-                    <p class="text-nh-light/70 text-sm">We don't believe in one-size-fits-all. Every solution is custom-designed to solve your specific "boss fights."</p>
+                    <p class="text-nh-light/80 text-sm mb-2">
+                        <strong class="text-nh-accent">For Everyone:</strong> No cookie-cutter solutions. We build exactly what you need, the way you need it.
+                    </p>
+                    <p class="text-nh-light/60 text-xs font-mono border-l-2 border-nh-blue pl-2">
+                        <strong class="text-nh-blue">Tech Note:</strong> Custom architecture, API-first design, modular components, extensible codebase
+                    </p>
                 </div>
-                <div class="p-6 bg-nh-dark rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.4s;">
+                <div class="p-6 bg-glass-ui backdrop-blur-sm border border-glass-ui rounded-lg shadow-xl animate-fade-in-up transform hover:scale-105 transition-transform duration-300" style="animation-delay: 0.4s;">
                     <div class="text-3xl text-nh-accent mb-4"><i class="fa-solid fa-handshake-angle"></i></div>
                     <h3 class="text-xl font-semibold mb-2 text-nh-light">Dedicated Partnership</h3>
-                    <p class="text-nh-light/70 text-sm">We're your "power-up" – committed to your success with ongoing support and a focus on long-term value.</p>
+                    <p class="text-nh-light/80 text-sm mb-2">
+                        <strong class="text-nh-accent">For Everyone:</strong> We're with you for the long haul. Ongoing support, updates, and improvements as your needs evolve.
+                    </p>
+                    <p class="text-nh-light/60 text-xs font-mono border-l-2 border-nh-blue pl-2">
+                        <strong class="text-nh-blue">Tech Note:</strong> Version control, documentation, monitoring, maintenance contracts, feature roadmap
+                    </p>
                 </div>
             </div>
         </div>

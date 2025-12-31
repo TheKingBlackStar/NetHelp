@@ -97,15 +97,16 @@ body {
 
 .bento-tile {
     background: var(--glass-ui);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--glass-ui);
     border-radius: 1rem;
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease-out;
+    transition: transform 0.3s ease-out, border-color 0.3s ease-out;
     min-height: 250px;
+    will-change: transform;
 }
 
 .bento-tile:hover {
@@ -358,7 +359,91 @@ select.form-input optgroup, select.form-input option {
     @apply block text-nh-light hover:text-nh-accent px-3 py-3 rounded-md transition duration-300 text-lg mb-2 border-b border-nh-darker hover:bg-nh-darker;
 }
 
-/* Text Scramble - handled in JavaScript */
+/* Hero Title Styling - Optimized Performance */
+.hero-headline-scramble {
+    position: relative;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    font-family: 'Inter Tight', sans-serif;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    will-change: transform;
+}
+
+/* Ensure words stay together - no breaking */
+.hero-headline-scramble .word {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 0.3em;
+    position: relative;
+    will-change: transform;
+    transition: transform 0.3s ease-out;
+}
+
+.hero-title-line {
+    display: block;
+    position: relative;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.hero-title-primary {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(52, 152, 219, 0.6), 0 0 40px rgba(52, 152, 219, 0.4);
+}
+
+.hero-title-accent {
+    color: var(--nh-accent);
+    text-shadow: 0 0 25px rgba(243, 156, 18, 0.8), 0 0 50px rgba(243, 156, 18, 0.6);
+    position: relative;
+}
+
+/* Letter breaking effect - optimized with transforms */
+.hero-headline-scramble .scramble-char {
+    display: inline-block;
+    position: relative;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-headline-scramble .scramble-char.broken {
+    transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(0.8);
+    opacity: 0.6;
+}
+
+/* Word reveal on load */
+.hero-headline-scramble .word {
+    display: inline-block;
+    opacity: 0;
+    animation: wordReveal 0.6s ease-out forwards;
+}
+
+.hero-headline-scramble .word:nth-child(1) { animation-delay: 0.1s; }
+.hero-headline-scramble .word:nth-child(2) { animation-delay: 0.2s; }
+.hero-headline-scramble .word:nth-child(3) { animation-delay: 0.3s; }
+.hero-headline-scramble .word:nth-child(4) { animation-delay: 0.4s; }
+.hero-headline-scramble .word:nth-child(5) { animation-delay: 0.5s; }
+.hero-headline-scramble .word:nth-child(6) { animation-delay: 0.6s; }
+
+.hero-title-accent .word:nth-child(1) { animation-delay: 0.8s; }
+.hero-title-accent .word:nth-child(2) { animation-delay: 0.9s; }
+.hero-title-accent .word:nth-child(3) { animation-delay: 1.0s; }
+.hero-title-accent .word:nth-child(4) { animation-delay: 1.1s; }
+
+@keyframes wordReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
 
 /* Logo Animation */
@@ -589,6 +674,664 @@ body {
     padding-bottom: 120px;
 }
 
+/* View Toggle Buttons */
+.view-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.view-btn {
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-ui);
+    border-radius: 0.25rem;
+    color: var(--nh-light);
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.view-btn:hover {
+    background: rgba(243, 156, 18, 0.1);
+    border-color: var(--nh-accent);
+}
+
+.view-btn.active {
+    background: var(--nh-accent);
+    border-color: var(--nh-accent);
+    color: var(--nh-base-black);
+    font-weight: 600;
+}
+
+/* Project Content Views */
+.project-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.project-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Simple View Styling */
+.simple-explanation {
+    padding: 0.5rem 0;
+}
+
+.simple-explanation p {
+    margin-bottom: 1.5rem;
+}
+
+.simple-explanation span.text-2xl {
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.demo-button {
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.demo-button:hover::before {
+    left: 100%;
+}
+
+/* Technical View Styling */
+.tech-showcase {
+    padding: 0.5rem 0;
+}
+
+.tech-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(52, 152, 219, 0.15);
+    border: 1px solid rgba(52, 152, 219, 0.4);
+    border-radius: 0.25rem;
+    color: var(--nh-blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tech-code-block {
+    background: rgba(5, 5, 5, 0.8);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(52, 152, 219, 0.1);
+    border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.code-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(52, 152, 219, 0.5);
+}
+
+.code-dot:nth-child(1) { background: #ff5f56; }
+.code-dot:nth-child(2) { background: #ffbd2e; }
+.code-dot:nth-child(3) { background: #27c93f; }
+
+.code-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--nh-light);
+    margin-left: auto;
+}
+
+.code-content {
+    margin: 0;
+    padding: 1rem;
+    background: transparent;
+    overflow-x: auto;
+}
+
+.code-content code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--nh-blue);
+    line-height: 1.6;
+    display: block;
+    white-space: pre;
+}
+
+.code-content code .comment {
+    color: #6a9955;
+}
+
+.tech-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.tech-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(52, 152, 219, 0.05);
+    border-left: 2px solid var(--nh-blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--nh-light);
+}
+
+.tech-feature-item i {
+    font-size: 1rem;
+}
+
+.tech-stats {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(52, 152, 219, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.tech-stat {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--nh-blue);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--nh-light);
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .tech-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .tech-badge-row {
+        justify-content: center;
+    }
+}
+
+/* Technical Stack Cards */
+.tech-stack-card {
+    background: var(--glass-ui);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-ui);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.tech-stack-card:hover {
+    border-color: var(--nh-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.2);
+}
+
+.tech-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+/* Process Step Enhancements */
+.process-step-content p {
+    margin-bottom: 0.5rem;
+}
+
+.process-step-content .border-l-2 {
+    margin-top: 0.75rem;
+    padding-left: 0.75rem;
+}
+
+/* Excel Viewer Styles */
+.excel-viewer-container {
+    position: relative;
+    background: var(--glass-ui);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-ui);
+    border-radius: 1rem;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Excel Tabs */
+.excel-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(5, 5, 5, 0.5);
+    border-bottom: 1px solid var(--glass-ui);
+    overflow-x: auto;
+}
+
+/* Per-tab explanation (under tabs) */
+.excel-sheet-info {
+    padding: 0.9rem 1.5rem 1rem;
+    background: rgba(5, 5, 5, 0.35);
+    border-bottom: 1px solid var(--glass-ui);
+}
+.excel-sheet-info-title {
+    font-weight: 900;
+    color: var(--nh-accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+}
+.excel-sheet-info-text {
+    color: rgba(236, 240, 241, 0.8);
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.excel-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-ui);
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: var(--nh-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border-bottom: none;
+}
+
+.excel-tab:hover {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: var(--nh-blue);
+}
+
+.excel-tab.active {
+    background: rgba(52, 152, 219, 0.2);
+    border-color: var(--nh-blue);
+    color: var(--nh-blue);
+    border-bottom: 2px solid var(--nh-blue);
+}
+
+.excel-tab i {
+    font-size: 1rem;
+}
+
+.excel-viewer-wrapper {
+    position: relative;
+    max-height: 600px;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.excel-sheet {
+    display: none;
+}
+
+.excel-sheet.active {
+    display: block;
+}
+
+.excel-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.excel-date-header {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 2px solid var(--nh-accent);
+}
+
+/* Two-column layout helper (Employees sheet) */
+.excel-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .excel-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.excel-viewer-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+}
+
+.excel-viewer-wrapper table td,
+.excel-viewer-wrapper table th {
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--nh-light);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.excel-viewer-wrapper table th {
+    background: rgba(52, 152, 219, 0.2);
+    font-weight: 600;
+    color: var(--nh-blue);
+}
+
+/* Dropdowns inside the Excel demo (interactive but no free typing) */
+.excel-select {
+    width: 100%;
+    padding: 0.35rem 0.5rem;
+    border-radius: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--nh-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    outline: none;
+}
+.excel-select:focus {
+    border-color: rgba(243, 156, 18, 0.6);
+    box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
+}
+.excel-select option {
+    background-color: var(--dropdown-option-bg);
+    color: var(--dropdown-option-text);
+}
+
+/* Conditional formatting (Excel-like) */
+.excel-viewer-wrapper table tbody tr.is-duplicate td {
+    background: rgba(220, 38, 38, 0.12);
+}
+.excel-viewer-wrapper table tbody tr.is-duplicate td:first-child {
+    box-shadow: inset 4px 0 0 rgba(220, 38, 38, 0.75);
+}
+
+.excel-viewer-wrapper table tbody tr.status-active td {
+    background: rgba(0, 255, 0, 0.06);
+}
+.excel-viewer-wrapper table tbody tr.status-needs-service td {
+    background: rgba(243, 156, 18, 0.08);
+}
+.excel-viewer-wrapper table tbody tr.status-in-service td {
+    background: rgba(52, 152, 219, 0.08);
+}
+.excel-viewer-wrapper table tbody tr.status-out-of-service td {
+    background: rgba(220, 38, 38, 0.06);
+}
+
+.excel-viewer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none;
+    background: transparent;
+}
+
+.excel-placeholder {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--nh-light);
+}
+
+/* Demo Explanation Panel */
+.excel-help-panel {
+    background: var(--glass-ui);
+    border: 1px solid var(--glass-ui);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.excel-help-summary {
+    cursor: pointer;
+    padding: 1rem 1.25rem;
+    background: rgba(5, 5, 5, 0.35);
+    border-bottom: 1px solid var(--glass-ui);
+    color: var(--nh-light);
+    letter-spacing: 0.04em;
+}
+.excel-help-summary::-webkit-details-marker {
+    display: none;
+}
+.excel-help-hint {
+    color: rgba(236, 240, 241, 0.55);
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+.excel-help-body {
+    padding: 1rem 1.25rem 1.25rem;
+}
+.excel-help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.excel-help-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.65rem;
+    padding: 1rem;
+}
+.excel-help-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+.excel-help-list {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: rgba(236, 240, 241, 0.85);
+    padding-left: 1.1rem;
+}
+.excel-help-list li {
+    margin: 0.35rem 0;
+}
+.excel-help-legend {
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: rgba(236, 240, 241, 0.85);
+    display: grid;
+    gap: 0.5rem;
+}
+.excel-help-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.excel-help-swatch {
+    width: 1.25rem;
+    height: 0.95rem;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+    flex: 0 0 auto;
+}
+.excel-help-swatch.is-duplicate {
+    background: rgba(220, 38, 38, 0.12);
+    border-color: rgba(220, 38, 38, 0.35);
+}
+.excel-help-swatch.status-active {
+    background: rgba(0, 255, 0, 0.06);
+    border-color: rgba(0, 255, 0, 0.18);
+}
+.excel-help-swatch.status-needs-service {
+    background: rgba(243, 156, 18, 0.08);
+    border-color: rgba(243, 156, 18, 0.25);
+}
+.excel-help-swatch.status-in-service {
+    background: rgba(52, 152, 219, 0.08);
+    border-color: rgba(52, 152, 219, 0.25);
+}
+.excel-help-swatch.status-out-of-service {
+    background: rgba(220, 38, 38, 0.06);
+    border-color: rgba(220, 38, 38, 0.22);
+}
+.excel-help-note {
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .excel-help-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.excel-security-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(243, 156, 18, 0.1);
+    border: 1px solid rgba(243, 156, 18, 0.3);
+    border-radius: 0.5rem;
+    color: var(--nh-accent);
+    font-size: 0.75rem;
+}
+
+/* Video Demo Styles */
+.video-demo-container {
+    position: relative;
+    background: var(--glass-ui);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-ui);
+    border-radius: 1rem;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background: var(--nh-base-black);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.demo-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.video-overlay-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--nh-light);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.8;
+}
+
+.demo-video:not([poster]) + .video-overlay-info {
+    display: none;
+}
+
+.video-security-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(52, 152, 219, 0.1);
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    border-radius: 0.5rem;
+    color: var(--nh-blue);
+    font-size: 0.75rem;
+}
+
+/* Security: Prevent copying */
+.excel-viewer-wrapper * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .bento-grid {
@@ -611,6 +1354,15 @@ body {
     
     body {
         padding-bottom: 80px;
+    }
+    
+    .view-btn {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.75rem;
+    }
+    
+    .tech-stack-card {
+        padding: 1rem;
     }
 }
 
