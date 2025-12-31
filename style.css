@@ -1386,6 +1386,34 @@ body {
     }
 }
 
+/* Project badges (Coming Soon / Preview) */
+.project-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.project-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(236, 240, 241, 0.85);
+}
+.project-badge-soon {
+    border-color: rgba(243, 156, 18, 0.35);
+    background: rgba(243, 156, 18, 0.10);
+    color: var(--nh-accent);
+}
+.project-badge-preview {
+    border-color: rgba(52, 152, 219, 0.35);
+    background: rgba(52, 152, 219, 0.10);
+    color: var(--nh-blue);
+}
+
 .excel-security-notice {
     display: flex;
     align-items: center;
