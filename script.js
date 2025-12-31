@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bootBarFill = document.getElementById('boot-bar-fill');
     const bootPercent = document.getElementById('boot-percent');
     const bootStatus = document.getElementById('boot-status');
+    const bootSubtitle = document.getElementById('boot-subtitle');
     const projectCards = document.querySelectorAll('.project-card');
 
     // --- Initialize ---
@@ -62,22 +63,70 @@ document.addEventListener('DOMContentLoaded', () => {
         if (terminalFooter) terminalFooter.style.display = 'none';
     }
 
-    async function runBootSequence() {
-        if (!bootLoader) return;
-        // Simulated boot sequence, then reveal page
-        const steps = [
-            { p: 10, t: 'Booting' },
-            { p: 28, t: 'Loading UI modules' },
-            { p: 48, t: 'Loading demo data' },
-            { p: 70, t: 'Applying rules' },
-            { p: 92, t: 'Finalizing' }
+    const BOOT_MIN_DURATION_MS = 8500; // intentionally slow so users can read the messages
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function startBootMessageCarousel() {
+        if (!bootLoader) return () => {};
+
+        const lines = [
+            'Warming up the automation engine…',
+            'Negotiating with the laws of physics…',
+            'Aligning drivers, routes, and reality…',
+            'Assembling spreadsheets into strategy…',
+            'Calibrating duplicate-detection sensors…',
+            'Ensuring vehicles are, in fact, vehicles…',
+            'Loading best practices (and good vibes)…',
+            'Compiling professional excellence…',
+            'Optimizing for humans, not just computers…',
+            'Boot sequence: unusually satisfying…'
         ];
 
-        for (const s of steps) {
-            setBootProgress(s.p, s.t);
+        let idx = 0;
+        const interval = setInterval(() => {
+            const next = lines[idx % lines.length];
+            idx++;
+            if (bootSubtitle) bootSubtitle.textContent = next;
+        }, 900);
+
+        return () => clearInterval(interval);
+    }
+
+    async function runBootSequenceUntilReady(readyPromise) {
+        if (!bootLoader) return;
+
+        const stopCarousel = startBootMessageCarousel();
+        const startedAt = Date.now();
+
+        // Smooth progress to 95% over BOOT_MIN_DURATION_MS
+        const tickMs = 120;
+        const maxBeforeReady = 95;
+
+        let resolvedReady = false;
+        readyPromise.then(() => { resolvedReady = true; }).catch(() => { resolvedReady = true; });
+
+        while (true) {
+            const elapsed = Date.now() - startedAt;
+            const t = Math.min(1, elapsed / BOOT_MIN_DURATION_MS);
+
+            // Ease-out curve for nicer feel
+            const eased = 1 - Math.pow(1 - t, 3);
+            const pct = Math.floor(eased * maxBeforeReady);
+
+            setBootProgress(pct, resolvedReady ? 'Final checks…' : 'Loading…');
+
+            const minTimeDone = elapsed >= BOOT_MIN_DURATION_MS;
+            if (minTimeDone && resolvedReady) break;
+
             // eslint-disable-next-line no-await-in-loop
-            await new Promise(r => setTimeout(r, 180));
+            await sleep(tickMs);
         }
+
+        stopCarousel();
+        finishBoot();
     }
 
     // --- UTC Clock ---
@@ -684,12 +733,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Start the boot sequence immediately, then finish after demo loads (or timeout fallback)
-    runBootSequence();
-    // Fallback: never leave users stuck on loader
-    setTimeout(() => {
-        if (bootLoader && bootLoader.style.display !== 'none') finishBoot();
-    }, 6000);
+    // Start the boot sequence and keep it up for a minimum duration,
+    // finishing only after BOTH (1) min time and (2) demo load attempt.
 
     // --- Excel Viewer Security & Tab Navigation ---
     const excelViewer = document.getElementById('excel-viewer');
@@ -1317,10 +1362,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Kick off demo load (no persistence; refresh resets back to CSV defaults)
-    initLogisticsMatrixDemo().finally(() => {
-        // finish boot shortly after demo attempts to load
-        setTimeout(() => finishBoot(), 250);
-    });
+    const demoReadyPromise = initLogisticsMatrixDemo();
+    // Never get stuck if something goes wrong: consider "ready" after a hard cap
+    const cappedReadyPromise = Promise.race([demoReadyPromise, sleep(12000)]);
+    runBootSequenceUntilReady(cappedReadyPromise);
     
     if (excelViewer) {
         // Disable right-click context menu
