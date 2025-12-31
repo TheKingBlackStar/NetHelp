@@ -380,6 +380,66 @@ select.form-input optgroup, select.form-input option {
     will-change: transform;
 }
 
+/* Hero Branding (logo above title) */
+.hero-branding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-logo-wrap {
+    position: relative;
+    padding: 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 0 1px rgba(52, 152, 219, 0.10),
+        0 20px 60px rgba(0, 0, 0, 0.55);
+    animation: hero-float 3.2s ease-in-out infinite alternate;
+}
+
+.hero-logo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -18px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.18), rgba(243, 156, 18, 0.10), transparent 70%);
+    filter: blur(10px);
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.hero-logo {
+    width: clamp(120px, 18vw, 220px);
+    height: auto;
+    display: block;
+}
+
+.hero-system-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    color: rgba(236, 240, 241, 0.65);
+    text-transform: uppercase;
+}
+
+@keyframes hero-float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .hero-system-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+    }
+    .hero-logo-wrap {
+        padding: 0.6rem;
+    }
+}
+
 /* Ensure words stay together - no breaking */
 .hero-headline-scramble .word {
     display: inline-block;
