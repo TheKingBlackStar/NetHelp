@@ -127,18 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
         finishBoot();
     }
 
-    // --- UTC Clock ---
-    function updateUTCTime() {
+    // --- Local Time (12-hour AM/PM) ---
+    function updateLocalTime() {
         if (utcClock) {
             const now = new Date();
-            const hours = String(now.getUTCHours()).padStart(2, '0');
-            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
-            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
-            utcClock.textContent = `${hours}:${minutes}:${seconds}`;
+            utcClock.textContent = now.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
         }
     }
-    updateUTCTime();
-    setInterval(updateUTCTime, 1000);
+    updateLocalTime();
+    setInterval(updateLocalTime, 1000);
 
     // --- Terminal Logging ---
     function logToTerminal(message) {

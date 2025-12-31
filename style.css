@@ -334,7 +334,7 @@ select.form-input optgroup, select.form-input option {
     @apply bg-nh-base-black/90 shadow-2xl py-2;
 }
 #header.scrolled .animated-logo {
-    @apply h-12 md:h-14;
+    @apply h-16 md:h-20;
 }
 
 .nav-link {
