@@ -63,6 +63,21 @@
     <!-- Neural Fabric Background -->
     <canvas id="neural-fabric" class="fixed inset-0 z-0 pointer-events-none"></canvas>
 
+    <!-- Boot Loader Overlay -->
+    <div id="boot-loader" class="boot-loader" aria-live="polite" aria-busy="true">
+        <div class="boot-card">
+            <div class="boot-title font-mono">NETHELP_OS</div>
+            <div class="boot-subtitle font-mono text-nh-light/70">Initializing systems…</div>
+            <div class="boot-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div id="boot-bar-fill" class="boot-bar-fill"></div>
+            </div>
+            <div class="boot-meta font-mono">
+                <span id="boot-percent">0%</span>
+                <span id="boot-status" class="text-nh-terminal-green">Booting</span>
+            </div>
+        </div>
+    </div>
+
     <!-- HUD Top Bar -->
     <div id="hud-bar" class="fixed top-0 left-0 right-0 z-50 hud-bar">
         <div class="container mx-auto px-4 md:px-6 py-2 flex justify-between items-center text-sm font-mono">

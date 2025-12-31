@@ -23,11 +23,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroHeadline = document.getElementById('hero-headline');
     const neuralFabricCanvas = document.getElementById('neural-fabric');
     const terminalLogs = document.getElementById('terminal-logs');
+    const terminalFooter = document.getElementById('terminal-footer');
+    const bootLoader = document.getElementById('boot-loader');
+    const bootBarFill = document.getElementById('boot-bar-fill');
+    const bootPercent = document.getElementById('boot-percent');
+    const bootStatus = document.getElementById('boot-status');
     const projectCards = document.querySelectorAll('.project-card');
 
     // --- Initialize ---
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- Boot Loader (startup screen) ---
+    let terminalEnabled = false; // user requested no terminal logs once loaded; keep disabled overall
+
+    function setBootProgress(percent, statusText) {
+        const p = Math.max(0, Math.min(100, Number(percent) || 0));
+        if (bootBarFill) bootBarFill.style.width = `${p}%`;
+        if (bootPercent) bootPercent.textContent = `${p}%`;
+        if (bootStatus && statusText) bootStatus.textContent = statusText;
+        const bar = bootLoader ? bootLoader.querySelector('.boot-bar') : null;
+        if (bar) bar.setAttribute('aria-valuenow', String(p));
+    }
+
+    function finishBoot() {
+        setBootProgress(100, 'nethelp.solutions loaded');
+        if (bootLoader) {
+            bootLoader.setAttribute('aria-busy', 'false');
+            setTimeout(() => {
+                bootLoader.classList.add('hidden');
+            }, 450);
+            setTimeout(() => {
+                bootLoader.style.display = 'none';
+            }, 1100);
+        }
+        // Remove terminal footer after boot
+        if (terminalFooter) terminalFooter.style.display = 'none';
+    }
+
+    async function runBootSequence() {
+        if (!bootLoader) return;
+        // Simulated boot sequence, then reveal page
+        const steps = [
+            { p: 10, t: 'Booting' },
+            { p: 28, t: 'Loading UI modules' },
+            { p: 48, t: 'Loading demo data' },
+            { p: 70, t: 'Applying rules' },
+            { p: 92, t: 'Finalizing' }
+        ];
+
+        for (const s of steps) {
+            setBootProgress(s.p, s.t);
+            // eslint-disable-next-line no-await-in-loop
+            await new Promise(r => setTimeout(r, 180));
+        }
     }
 
     // --- UTC Clock ---
@@ -45,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Terminal Logging ---
     function logToTerminal(message) {
+        if (!terminalEnabled) return;
         if (terminalLogs) {
             const logLine = document.createElement('div');
             logLine.className = 'terminal-line';
@@ -633,10 +684,12 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Initial terminal log
+    // Start the boot sequence immediately, then finish after demo loads (or timeout fallback)
+    runBootSequence();
+    // Fallback: never leave users stuck on loader
     setTimeout(() => {
-        logToTerminal('Neural Fabric network initialized');
-    }, 1000);
+        if (bootLoader && bootLoader.style.display !== 'none') finishBoot();
+    }, 6000);
 
     // --- Excel Viewer Security & Tab Navigation ---
     const excelViewer = document.getElementById('excel-viewer');
@@ -1264,7 +1317,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Kick off demo load (no persistence; refresh resets back to CSV defaults)
-    initLogisticsMatrixDemo();
+    initLogisticsMatrixDemo().finally(() => {
+        // finish boot shortly after demo attempts to load
+        setTimeout(() => finishBoot(), 250);
+    });
     
     if (excelViewer) {
         // Disable right-click context menu
