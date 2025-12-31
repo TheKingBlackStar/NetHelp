@@ -536,6 +536,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Smooth Scrolling & Active Link Highlighting ---
+    const DEMO_SECTION_IDS = new Set(['excel-demo', 'odoo-demo']);
+
+    function revealDemoSectionById(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (!section) return false;
+        if (section.classList.contains('demo-hidden')) {
+            section.classList.remove('demo-hidden');
+            section.classList.add('demo-visible');
+        }
+        return true;
+    }
+
+    function revealIfDemoHref(href) {
+        if (!href || !href.startsWith('#')) return false;
+        const id = href.slice(1);
+        if (!DEMO_SECTION_IDS.has(id)) return false;
+        return revealDemoSectionById(id);
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -547,6 +566,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return;
             }
+
+            // If a demo section is hidden, reveal it before scrolling
+            revealIfDemoHref(href);
 
             const targetElement = document.querySelector(href);
             if (targetElement) {
@@ -564,6 +586,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (href === '#excel-demo') {
                     logToTerminal('User accessed Logistics Matrix demo');
                 }
+                if (href === '#odoo-demo') {
+                    logToTerminal('User accessed Odoo Enterprise demo');
+                }
                 
                 if (navIndicator && Array.from(desktopNavLinks).includes(this)) {
                     updateIndicator(this);
@@ -571,6 +596,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Allow direct links to demos (ex: /#excel-demo) even though demos start hidden
+    if (window.location && window.location.hash) {
+        revealIfDemoHref(window.location.hash);
+    }
 
     const findActiveSectionLink = () => {
         let activeLink = null;

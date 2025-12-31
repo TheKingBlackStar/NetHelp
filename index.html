@@ -203,7 +203,7 @@
                                 <strong class="text-nh-accent text-lg">Fewer mistakes:</strong><br>
                                 No more typos or missed appointments. The system catches errors before they happen.
                             </p>
-                            <a href="#excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-accent hover:bg-nh-accent-hover text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                            <a href="#excel-demo" data-open-demo="excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-accent hover:bg-nh-accent-hover text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
                                 <i class="fa-solid fa-play-circle"></i>
                                 SEE DEMO
                             </a>
@@ -266,9 +266,9 @@
                                     <div class="stat-label">Manual Work</div>
                                 </div>
                             </div>
-                            <a href="#excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-blue hover:bg-opacity-80 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                            <a href="#excel-demo" data-open-demo="excel-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-blue hover:bg-opacity-80 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
                                 <i class="fa-solid fa-code"></i>
-                                VIEW LIVE DEMO
+                                SEE DEMO
                             </a>
                         </div>
                     </div>
@@ -303,6 +303,10 @@
                         <p class="text-nh-light/80 text-sm">
                             <strong class="text-nh-accent">Why it matters:</strong> No more switching between different apps or spreadsheets. Everything your organization needs is accessible from anywhere, with automatic backups and updates.
                         </p>
+                        <a href="#odoo-demo" data-open-demo="odoo-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-accent hover:bg-nh-accent-hover text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                            <i class="fa-solid fa-play-circle"></i>
+                            SEE DEMO
+                        </a>
                     </div>
                     
                     <!-- Technical View -->
@@ -316,6 +320,10 @@
                         <p class="text-nh-light/80 text-sm">
                             <strong class="text-nh-blue">Custom Modules:</strong> Church-specific workflows, automated reporting, integration APIs, custom dashboards
                         </p>
+                        <a href="#odoo-demo" data-open-demo="odoo-demo" class="demo-button inline-flex items-center gap-2 mt-4 px-6 py-3 bg-nh-blue hover:bg-opacity-80 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 font-mono text-sm">
+                            <i class="fa-solid fa-code"></i>
+                            SEE DEMO
+                        </a>
                     </div>
                 </div>
 
@@ -442,7 +450,7 @@
     </section>
 
     <!-- Excel Viewer Section -->
-    <section id="excel-demo" class="py-16 md:py-24 relative">
+    <section id="excel-demo" class="py-16 md:py-24 relative demo-section demo-hidden">
         <div class="container mx-auto px-4 md:px-6">
             <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">LOGISTICS_MATRIX_DEMO</h2>
             <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
@@ -593,7 +601,7 @@
     </section>
 
     <!-- Odoo Demo Section -->
-    <section id="odoo-demo" class="py-16 md:py-24 relative">
+    <section id="odoo-demo" class="py-16 md:py-24 relative demo-section demo-hidden">
         <div class="container mx-auto px-4 md:px-6">
             <h2 class="text-3xl md:text-4xl font-black text-center mb-4 text-nh-accent font-mono">ODOO_ENTERPRISE_DEMO</h2>
             <p class="text-center text-nh-light/80 mb-4 max-w-2xl mx-auto">
@@ -605,26 +613,25 @@
             <div class="max-w-5xl mx-auto">
                 <div class="video-demo-container">
                     <div class="video-wrapper">
-                        <video 
-                            id="odoo-demo-video" 
-                            class="demo-video" 
-                            controls 
-                            controlsList="nodownload noplaybackrate"
-                            disablePictureInPicture
-                            preload="metadata"
-                            poster="images/odoo-demo-poster.jpg">
-                            <source src="videos/odoo-demo.mp4" type="video/mp4">
-                            <source src="videos/odoo-demo.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-overlay-info">
-                            <i class="fa-solid fa-play-circle text-nh-accent"></i>
-                            <span class="font-mono text-sm">Click to play demo</span>
-                        </div>
+                        <iframe
+                            class="demo-video"
+                            src="https://www.youtube.com/embed/nbso3NVz3p8?rel=0&modestbranding=1"
+                            title="Odoo Enterprise Demo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
                     </div>
                     <div class="video-security-notice">
                         <i class="fa-solid fa-lock text-nh-blue"></i>
                         <span class="font-mono text-xs">Demo Mode - No data access</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a class="font-mono text-sm text-nh-blue hover:text-nh-accent transition underline underline-offset-4"
+                           href="https://www.youtube.com/channel/UCkQPikELWZFLgQNHd73jkdg"
+                           target="_blank" rel="noopener noreferrer">
+                            Learn more about it here
+                        </a>
                     </div>
                 </div>
             </div>

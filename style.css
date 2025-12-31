@@ -1460,6 +1460,14 @@ body {
     -webkit-user-select: none;
 }
 
+/* Hide demo sections until user clicks "SEE DEMO" */
+.demo-hidden {
+    display: none;
+}
+.demo-visible {
+    display: block;
+}
+
 .video-overlay-info {
     position: absolute;
     top: 50%;
